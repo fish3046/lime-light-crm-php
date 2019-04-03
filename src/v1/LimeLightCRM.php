@@ -7,7 +7,9 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 
 /**
- * Class ApiClient
+ * For use with version 1 of limelight API
+ * Documentation found here: https://developer-prod.limelightcrm.com/
+ *
  * @package KevinEm\LimeLightCRM\v1
  */
 class LimeLightCRM
