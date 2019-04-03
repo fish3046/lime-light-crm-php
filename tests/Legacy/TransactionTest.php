@@ -1,18 +1,19 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM\Tests;
+namespace KevinEm\LimeLightCRM\Tests\Legacy;
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
-use KevinEm\LimeLightCRM\LimeLightCRM;
-use KevinEm\LimeLightCRM\Transaction;
+use KevinEm\LimeLightCRM\Legacy\LimeLightCRM;
+use KevinEm\LimeLightCRM\Legacy\Transaction;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class TransactionTest extends \PHPUnit_Framework_TestCase
+class TransactionTest extends TestCase
 {
 
     /**
-     * @var LimeLightCRM
+     * @var m\MockInterface
      */
     protected $limeLightCRM;
 

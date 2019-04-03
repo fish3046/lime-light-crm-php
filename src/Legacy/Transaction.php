@@ -1,14 +1,14 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM;
+namespace KevinEm\LimeLightCRM\Legacy;
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
 
 
 /**
  * Class Transaction
- * @package KevinEm\LimeLightCRM
+ * @package KevinEm\LimeLightCRM\Legacy
  */
 class Transaction
 {
@@ -24,7 +24,7 @@ class Transaction
      */
     public function __construct(LimeLightCRM $limeLightCRM)
     {
-        $this->LimeLightCRM = $limeLightCRM;
+        $this->limeLightCRM = $limeLightCRM;
     }
 
     /**
@@ -32,7 +32,7 @@ class Transaction
      */
     public function getTransactionUrl()
     {
-        return $this->LimeLightCRM->getBaseUrl() . '/admin/transact.php';
+        return $this->limeLightCRM->getBaseUrl() . '/admin/transact.php';
     }
 
     /**
@@ -72,11 +72,11 @@ class Transaction
      */
     public function newOrder(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('NewOrder', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('NewOrder', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -89,11 +89,11 @@ class Transaction
      */
     public function newOrderCardOnFile(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('NewOrderCardOnFile', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('NewOrderCardOnFile', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -106,11 +106,11 @@ class Transaction
      */
     public function newOrderWithProspect(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('NewOrderWithProspect', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('NewOrderWithProspect', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -123,11 +123,11 @@ class Transaction
      */
     public function authorizePayment(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('authorize_payment', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('authorize_payment', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -140,11 +140,11 @@ class Transaction
      */
     public function newProspect(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('NewProspect', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('NewProspect', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -157,11 +157,11 @@ class Transaction
      */
     public function threeDRedirect(array $data)
     {
-        $formParams = $this->LimeLightCRM->buildFormParams('three_d_redirect', $data);
+        $formParams = $this->limeLightCRM->buildFormParams('three_d_redirect', $data);
 
-        $res = $this->LimeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
+        $res = $this->limeLightCRM->getResponse('POST', $this->getTransactionUrl(), $formParams);
 
-        $parsed = $this->LimeLightCRM->parseResponse($res);
+        $parsed = $this->limeLightCRM->parseResponse($res);
 
         $this->checkResponse($parsed);
 

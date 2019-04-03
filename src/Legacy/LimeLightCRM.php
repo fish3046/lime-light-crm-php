@@ -1,20 +1,21 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM;
+namespace KevinEm\LimeLightCRM\Legacy;
 
-
-use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
- * Class LimeLightCRM
- * @package KevinEm\LimeLightCRM
+ * This is for use with the old legacy API.
+ * Documentation found here: https://developer-legacy-prod.limelightcrm.com/
+ *
+ * @package KevinEm\LimeLightCRM\Legacy
  */
 class LimeLightCRM
 {
 
     /**
-     * @var Client
+     * @var ClientInterface
      */
     protected $httpClient;
 
@@ -45,36 +46,37 @@ class LimeLightCRM
 
     /**
      * LimeLightCRM constructor.
-     * @param array $options
+     *
+     * @param ClientInterface $client
+     * @param array           $options
      */
-    public function __construct(array $options)
+    public function __construct(ClientInterface $client, array $options)
     {
-        $this->baseUrl = $options['base_url'];
-
+        // Prep authentication options
+        $this->baseUrl  = $options['base_url'];
         $this->username = $options['username'];
-
         $this->password = $options['password'];
 
-        $this->setHttpClient(new Client());
+        $this->setHttpClient($client);
 
-        $this->membership = new Membership($this);
-
+        // Prep service classes
+        $this->membership  = new Membership($this);
         $this->transaction = new Transaction($this);
     }
 
     /**
-     * @return Client
+     * @return ClientInterface
      */
-    public function getHttpClient()
+    public function getHttpClient(): ClientInterface
     {
         return $this->httpClient;
     }
 
     /**
-     * @param Client $httpClient
+     * @param ClientInterface $httpClient
      * @return $this
      */
-    public function setHttpClient(Client $httpClient)
+    public function setHttpClient(ClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
 

@@ -1,19 +1,20 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM\Tests;
+namespace KevinEm\LimeLightCRM\Tests\Legacy;
 
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMMembershipException;
-use KevinEm\LimeLightCRM\LimeLightCRM;
-use KevinEm\LimeLightCRM\Membership;
+use KevinEm\LimeLightCRM\Legacy\LimeLightCRM;
+use KevinEm\LimeLightCRM\Legacy\Membership;
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 
-class MembershipTest extends \PHPUnit_Framework_TestCase
+class MembershipTest extends TestCase
 {
 
     /**
-     * @var limeLightCRM
+     * @var m\MockInterface
      */
     protected $limeLightCRM;
 
