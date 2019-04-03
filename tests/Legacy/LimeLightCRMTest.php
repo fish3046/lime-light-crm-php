@@ -1,17 +1,18 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM\Tests;
+namespace KevinEm\LimeLightCRM\Tests\Legacy;
 
 
 use GuzzleHttp\Client;
-use KevinEm\LimeLightCRM\LimeLightCRM;
+use KevinEm\LimeLightCRM\Legacy\LimeLightCRM;
 use Mockery as m;
 use Mockery\MockInterface;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
-class LimeLightCRMTest extends \PHPUnit_Framework_TestCase
+class LimeLightCRMTest extends TestCase
 {
 
     /**

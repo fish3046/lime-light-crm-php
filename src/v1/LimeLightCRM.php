@@ -3,8 +3,8 @@
 
 namespace KevinEm\LimeLightCRM\v1;
 
-use GuzzleHttp\Client;
-use KevinEm\v1\Order\Order;
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\RequestOptions;
 
 /**
  * Class ApiClient
@@ -14,7 +14,7 @@ class LimeLightCRM
 {
 
     /**
-     * @var Client
+     * @var ClientInterface
      */
     protected $httpClient;
 
@@ -34,35 +34,30 @@ class LimeLightCRM
     protected $password;
 
     /**
-     * @var Order
-     */
-    protected $order;
-
-    /**
      * LimeLightCRM constructor.
-     * @param array $options
+     *
+     * @param ClientInterface $client
+     * @param array  $options
      */
-    public function __construct(array $options)
+    public function __construct(ClientInterface $client, array $options)
     {
-        $this->baseUrl = $options['base_url'];
-
+        $this->baseUrl  = $options['base_url'];
         $this->username = $options['username'];
-
         $this->password = $options['password'];
 
-        $this->setHttpClient(new Client());
-
+        $this->setHttpClient($client);
     }
 
     /**
      * make request
-     * @param $method
-     * @param $data
-     * @param $type
+     *
+     * @param string $method
+     * @param array  $data
+     * @param string $httpMethod
      * @return array
-     * @throws LimeLightCRMTransactionException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function makeRequest($method, $data, $type)
+    public function makeRequest(string $method, array $data, string $httpMethod)
     {
         $authParams = $this->getAuth();
 
@@ -70,7 +65,7 @@ class LimeLightCRM
 
         $url = $this->getUrl($method);
 
-        $res = $this->getResponse($type, $url, array_merge($authParams, $formParams));
+        $res = $this->getResponse($httpMethod, $url, array_merge($authParams, $formParams));
 
         $parsed = $this->parseResponse($res);
 
@@ -85,7 +80,7 @@ class LimeLightCRM
     public function getAuth()
     {
         return [
-            'auth' => [$this->username,$this->password],
+            RequestOptions::AUTH => [$this->username,$this->password],
         ];
     }
 
@@ -95,13 +90,14 @@ class LimeLightCRM
      */
     public function buildFormParams($data = false)
     {
-        return ($data) ? ['form_params' => $data] : [];
+        return ($data) ? [RequestOptions::FORM_PARAMS => $data] : [];
     }
 
     /**
+     * @param string $method
      * @return string
      */
-    public function getUrl($method)
+    public function getUrl(string $method): string
     {
         return $this->getBaseUrl() . '/api/v1/' . $method;
     }
@@ -109,16 +105,17 @@ class LimeLightCRM
     /**
      * @return string
      */
-    public function getBaseUrl()
+    public function getBaseUrl(): string
     {
         return $this->baseUrl;
     }
 
     /**
-     * @param $method
-     * @param $uri
+     * @param       $method
+     * @param       $uri
      * @param array $options
      * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getResponse($method, $uri, array $options = [])
     {
@@ -128,18 +125,18 @@ class LimeLightCRM
     }
 
     /**
-     * @return Client
+     * @return ClientInterface
      */
-    public function getHttpClient()
+    public function getHttpClient(): ClientInterface
     {
         return $this->httpClient;
     }
 
     /**
-     * @param Client $httpClient
+     * @param ClientInterface $httpClient
      * @return $this
      */
-    public function setHttpClient(Client $httpClient)
+    public function setHttpClient(ClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
 

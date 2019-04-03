@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM;
+namespace KevinEm\LimeLightCRM\Legacy;
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
 

@@ -3,40 +3,14 @@
 
 namespace KevinEm\LimeLightCRM\v1;
 
-use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
-
 
 /**
  * Class Prospects
  * @package KevinEm/LimeLightCRM/v1
  */
-class Prospects
+class Prospects extends AbstractService
 {
-
-    /**
-     * @var apiClient
-     */
-    protected $apiClient;
-
-    /**
-     * Api Client constructor.
-     * @param LimeLightCRM $apiClient
-     */
-    public function __construct(LimeLightCRM $apiClient)
-    {
-        $this->apiClient = $apiClient;
-    }
-
-    /**
-     * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
-     */
-    public function makeRequest($method, $data)
-    {
-        return $this->apiClient->makeRequest($method, $data, 'POST');
-    }
-
-    /**
+   /**
      * @param array $data
      * @return array
      */
@@ -66,7 +40,6 @@ class Prospects
     /**
      * @param $prospectId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function prospectView($prospectId)
     {

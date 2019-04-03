@@ -2,16 +2,12 @@
 
 https://www.limelightcrm.com/
 
-[![Latest Stable Version](https://poser.pugx.org/kevinem/lime-light-crm-php/v/stable?format=flat-square)](https://packagist.org/packages/kevinem/lime-light-php)
-[![License](https://poser.pugx.org/kevinem/lime-light-crm-php/license?format=flat-square)](https://packagist.org/packages/kevinem/lime-light-crm-php)
-[![Build Status](https://travis-ci.org/kevinem/lime-light-crm-php.svg?branch=master)](https://travis-ci.org/kevinem/lime-light-crm-php)
-
 ## Installation
 
 To install, use composer:
 
 ```
-composer require kevinem/lime-light-crm-php
+composer require git@bitbucket.org:fish3046/lime-light-crm-php
 ```
 
 ## Documentation

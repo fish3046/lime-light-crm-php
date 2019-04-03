@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KevinEm\LimeLightCRM;
+namespace KevinEm\LimeLightCRM\Legacy;
 
 
 use GuzzleHttp\Client;

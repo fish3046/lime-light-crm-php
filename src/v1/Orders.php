@@ -3,39 +3,13 @@
 
 namespace KevinEm\LimeLightCRM\v1;
 
-use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
-
 
 /**
  * Class Orders
  * @package KevinEm/LimeLightCRM/v1
  */
-class Orders
+class Orders extends AbstractService
 {
-
-    /**
-     * @var apiClient
-     */
-    protected $apiClient;
-
-    /**
-     * Api Client constructor.
-     * @param LimeLightCRM $apiClient
-     */
-    public function __construct(LimeLightCRM $apiClient)
-    {
-        $this->apiClient = $apiClient;
-    }
-
-    /**
-     * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
-     */
-    public function makeRequest($method, $data)
-    {
-        return $this->apiClient->makeRequest($method, $data, 'POST');
-    }
-
     /**
      * @param array $data
      * @return array
@@ -84,7 +58,6 @@ class Orders
     /**
      * @param $orderId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function orderCalculateRefund($orderId)
     {
@@ -130,7 +103,6 @@ class Orders
     /**
      * @param array $orderIds
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function orderView(array $orderIds)
     {
@@ -176,7 +148,6 @@ class Orders
     /**
      * @param $orderId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function orderReprocess($orderId)
     {
@@ -186,7 +157,6 @@ class Orders
     /**
      * @param $orderId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function orderVoid($orderId)
     {
@@ -196,7 +166,6 @@ class Orders
     /**
      * @param $orderId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function repostToFulfillment($orderId)
     {

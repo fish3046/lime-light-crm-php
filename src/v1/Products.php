@@ -3,39 +3,13 @@
 
 namespace KevinEm\LimeLightCRM\v1;
 
-use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
-
 
 /**
  * Class Products
  * @package KevinEm/LimeLightCRM/v1
  */
-class Products
+class Products extends AbstractService
 {
-
-    /**
-     * @var apiClient
-     */
-    protected $apiClient;
-
-    /**
-     * Api Client constructor.
-     * @param LimeLightCRM $apiClient
-     */
-    public function __construct(LimeLightCRM $apiClient)
-    {
-        $this->apiClient = $apiClient;
-    }
-
-    /**
-     * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
-     */
-    public function makeRequest($method, $data)
-    {
-        return $this->apiClient->makeRequest($method, $data, 'POST');
-    }
-
     /**
      * @param array $data
      * @return array
@@ -48,7 +22,6 @@ class Products
     /**
      * @param array $productIds
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function productAttributeIndex(array $productIds)
     {
@@ -57,7 +30,6 @@ class Products
 
     /**
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function productBundleIndex()
     {
@@ -67,7 +39,6 @@ class Products
     /**
      * @param $productId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function productBundleView($productId)
     {
@@ -95,7 +66,6 @@ class Products
     /**
      * @param $productId
      * @return array
-     * @throws \KevinEm\LimeLightCRM\v1\LimeLightCRMTransactionException
      */
     public function productDelete($productId)
     {
