@@ -1,5 +1,5 @@
 {
-  "name": "deitsolutions/lime-light-crm-php",
+  "name": "fish3046/lime-light-crm-php",
   "description": "Lime Light CRM v1 PHP Client",
   "require": {
     "php": ">=7.1.0",
