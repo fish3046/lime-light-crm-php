@@ -1,0 +1,19 @@
+{
+  "gateway_id": "1",
+  "order_id": "10001",
+  "response_code": 10666,
+  "error_message": "User does not have permission to use this methoderrorFound=0",
+  "responseCode": "100",
+  "transactionID": "Not Available",
+  "customerId": "1",
+  "authId": "Not Available",
+  "orderTotal": "19.95",
+  "orderSalesTaxPercent": "0.00",
+  "orderSalesTaxAmount": "0.00",
+  "test": "1",
+  "prepaid_match": "0",
+  "subscription_id": {
+    "1": "f2aa8273baa6c4ea05261b5613cf3738"
+  },
+  "resp_msg": "Approved"
+}

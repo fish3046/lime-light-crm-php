@@ -41,13 +41,11 @@ class LimeLightCRMTest extends TestCase
 
         $this->clientMock = m::mock(Client::class);
 
-        $this->limeLightCRM = new LimeLightCRM([
+        $this->limeLightCRM = new LimeLightCRM($this->clientMock, [
             'base_url' => 'mock_base_url',
             'username' => 'mock_username',
             'password' => 'mock_password'
         ]);
-
-        $this->limeLightCRM->setHttpClient($this->clientMock);
 
         $this->responseMock = m::mock(ResponseInterface::class);
 
