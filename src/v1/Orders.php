@@ -137,30 +137,40 @@ class Orders extends AbstractService
     }
 
     /**
-     * @param array $data
+     * @param int  $orderId
+     * @param      $amount
+     * @param bool $keepRecurring
      * @return array
      */
-    public function orderRefund(array $data)
+    public function orderRefund(int $orderId, $amount, bool $keepRecurring = true)
     {
-        return $this->makeRequest('order_refund', $data);
+        return $this->makeRequest('order_refund', [
+            'order_id'       => $orderId,
+            'amount'         => $amount,
+            'keep_recurring' => $keepRecurring ? 1 : 0,
+        ]);
     }
 
     /**
-     * @param $orderId
+     * @param int $orderId
      * @return array
      */
-    public function orderReprocess($orderId)
+    public function orderReprocess(int $orderId)
     {
-        return $this->makeRequest('order_reprocess', ['order_id' => $orderId]);
+        return $this->makeRequest('order_reprocess', [
+            'order_id' => $orderId
+        ]);
     }
 
     /**
-     * @param $orderId
+     * @param int $orderId
      * @return array
      */
-    public function orderVoid($orderId)
+    public function orderVoid(int $orderId)
     {
-        return $this->makeRequest('order_void', ['order_id' => $orderId]);
+        return $this->makeRequest('order_void', [
+            'order_id' => $orderId
+        ]);
     }
 
     /**

@@ -153,20 +153,6 @@ class LimeLightCRM
      */
     public function parseResponse($response)
     {
-        $array = [];
-
-        /*$exploded = explode('&', $response);
-
-        foreach ($exploded as $explode) {
-            $line = explode('=', $explode);
-
-            if (isset($line[1])) {
-                $array[$line[0]] = urldecode($line[1]);
-            } else {
-                $array[] = $explode;
-            }
-        }*/
-
         $array = json_decode($response, true);
 
         return $array;

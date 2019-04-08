@@ -12,7 +12,11 @@ composer require git@bitbucket.org:fish3046/lime-light-crm-php
 
 ## Documentation
 
-https://developer-prod.limelightcrm.com/
+**Legacy**: https://developer-legacy-prod.limelightcrm.com/
+
+**v1**:  https://developer-prod.limelightcrm.com/
+
+**v2**: https://developer-v2.limelightcrm.com/
 
 ### Example v1 Usage
 
