@@ -36,4 +36,21 @@ class LimeLightCRMServiceProvider extends ServiceProvider
             return $e;
         });
     }
+
+    private function registerV2Engine()
+    {
+        $this->app->bind(\KevinEm\LimeLightCRM\v2\LimeLightCRM::class, function(Container $app){
+            $client = new Client();
+
+            $options = [
+                'base_url' => $app['config']['limelightcrm.base_url'],
+                'username' => $app['config']['limelightcrm.username'],
+                'password' => $app['config']['limelightcrm.password'],
+            ];
+
+            $e = new LimeLightCRM($client, $options);
+
+            return $e;
+        });
+    }
 }

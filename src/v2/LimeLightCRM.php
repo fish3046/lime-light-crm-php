@@ -1,17 +1,15 @@
 <?php
 
-
-namespace KevinEm\LimeLightCRM\v1;
+namespace KevinEm\LimeLightCRM\v2;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
-use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException;
 
 /**
- * For use with version 1 of limelight API
- * Documentation found here: https://developer-prod.limelightcrm.com/
+ * For use with version 2 of limelight API
+ * Documentation found here: https://developer-v2.limelightcrm.com
  *
- * @package KevinEm\LimeLightCRM\v1
+ * @package KevinEm\LimeLightCRM\v2
  */
 class LimeLightCRM
 {
@@ -54,23 +52,26 @@ class LimeLightCRM
     /**
      * make request
      *
-     * @param string $method
+     * @param string $url
      * @param array  $data
      * @param string $httpMethod
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function makeRequest(string $method, array $data, string $httpMethod)
+    public function makeRequest(string $url, array $data, string $httpMethod = 'POST'): array
     {
         $authParams = $this->getAuth();
-
         $formParams = $this->buildFormParams($data);
+        $url        = $this->getBaseUrl() . $url;
 
-        $url = $this->getUrl($method);
+        $requestOptions = array_merge($authParams, $formParams);
 
-        $res = $this->getResponse($httpMethod, $url, array_merge($authParams, $formParams));
+        // We need to either wrap the guzzle execution in a try...catch or turn HTTP_ERRORS exceptions
+        // off so the calling project can deal with the body themselves.
+        $requestOptions[RequestOptions::HTTP_ERRORS] = false;
 
-        $parsed = $this->parseResponse($res);
+        $res     = $this->getResponse($httpMethod, $url, $requestOptions);
+        $parsed  = $this->parseResponse($res);
 
         $this->checkResponse($parsed);
 
@@ -91,18 +92,9 @@ class LimeLightCRM
      * @param array $data
      * @return array
      */
-    public function buildFormParams($data = false)
+    public function buildFormParams($data = false): array
     {
         return ($data) ? [RequestOptions::FORM_PARAMS => $data] : [];
-    }
-
-    /**
-     * @param string $method
-     * @return string
-     */
-    public function getUrl(string $method): string
-    {
-        return $this->getBaseUrl() . '/api/v1/' . $method;
     }
 
     /**
@@ -161,82 +153,29 @@ class LimeLightCRM
 
     /**
      * @param array $response
-     * @throws LimeLightCRMGenericException
+     * @throws LimeLightCRMTransactionException
      */
     public function checkResponse(array $response)
     {
-        $exception = null;
+        /*$exception = null;
 
-        if (isset($response['response_code']) && $response['response_code'] != 100) {
-            $message = '';
-            if (isset($response['error_message'])) {
-                $message = $response['error_message'];
+        if (isset($response['response_code'])) {
+            $responses = explode(',', $response['response_code']);
+
+            foreach ($responses as $code) {
+                if (!in_array($code, [100])) {
+                    $exception = new LimeLightCRMTransactionException($code, $exception, $response);
+                }
             }
-            throw new LimeLightCRMGenericException($message, $response['response_code'], null, $response);
         }
+
+        if (isset($exception)) {
+            throw $exception;
+        }*/
     }
 
-    /**
-     * @return Credentials
-     */
-    public function credentials()
-    {
-        return new Credentials($this);
-    }
-
-    /**
-     * @return Products
-     */
-    public function products()
-    {
-        return new Products($this);
-    }
-
-    /**
-     * @return Shippings
-     */
-    public function shippings()
-    {
-        return new Shippings($this);
-    }
-
-    /**
-     * @return Campaigns
-     */
-    public function campaigns()
-    {
-        return new Campaigns($this);
-    }
-
-    /**
-     * @return Prospects
-     */
     public function prospects()
     {
         return new Prospects($this);
-    }
-
-    /**
-     * @return Payments
-     */
-    public function payments()
-    {
-        return new Payments($this);
-    }
-
-    /**
-     * @return Orders
-     */
-    public function orders()
-    {
-        return new Orders($this);
-    }
-
-    /**
-     * @return Customers
-     */
-    public function customers()
-    {
-        return new Customers($this);
     }
 }

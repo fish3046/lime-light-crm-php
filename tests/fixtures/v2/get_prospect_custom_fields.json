@@ -1,0 +1,25 @@
+{
+  "status": "SUCCESS",
+  "current_page": 1,
+  "data": [
+    {
+      "id": 1,
+      "field_type_id": 1,
+      "name": "guid",
+      "token_key": "guid",
+      "is_multi": 0,
+      "options": [],
+      "type_id": 13
+    }
+  ],
+  "first_page_url": "http:\/\/domain.limelightcrm.com\/api\/v2\/custom_fields\/prospects?page=1",
+  "from": 1,
+  "last_page": 1,
+  "last_page_url": "http:\/\/domain.limelightcrm.com\/api\/v2\/custom_fields\/prospects?page=1",
+  "next_page_url": null,
+  "path": "http:\/\/domain.limelightcrm.com\/api\/v2\/custom_fields\/prospects",
+  "per_page": 100,
+  "prev_page_url": null,
+  "to": 1,
+  "total": 1
+}
