@@ -82,4 +82,21 @@ class SubscriptionService
                 'preserve_new_recurring_price' => $makePermanent ? 1 : 0,
             ]);
     }
+
+    /**
+     * @see https://developer-prod.limelightcrm.com/#1481d7e3-c9d6-4f30-b73f-48cc39d00a05
+     * @param int    $orderId
+     * @param int    $productId
+     * @param string $date      MM/DD/YYYY format
+     */
+    public function changeRecurringDate(int $orderId, int $productId, string $date)
+    {
+        $this->v1Engine
+            ->orders()
+            ->subscriptionOrderUpdate([
+                'order_id'           => $orderId,
+                'product_id'         => $productId,
+                'new_recurring_date' => $date,
+            ]);
+    }
 }

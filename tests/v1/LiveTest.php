@@ -167,24 +167,13 @@ class LiveTest extends TestCase
 
     public function testSubscriptionOrderUpdate()
     {
-        /*
-        Stop recurring subscription
-        [
-            'order_id' => '10001',
-            'product_id' => '1',
-            'status'   => 'stop',
-        ]
-        */
-
         try {
             $resp = $this->service
                 ->orders()
                 ->subscriptionOrderUpdate([
-                    'order_id'                 => '10004',
-                    'product_id'               => '1',
-                    'new_recurring_price'      => '5.00',
-                    'new_recurring_product_id' => 1,
-                    'preserve_new_recurring_price' => 1,
+                    'order_id'           => '10006',
+                    'product_id'         => '1',
+                    'new_recurring_date' => '06/30/2019',
                 ]);
         } catch (LimeLightCRMGenericException $ex) {
             echo "EXCEPTION\n";
