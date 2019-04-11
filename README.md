@@ -1,4 +1,7 @@
-# Lime Light CRM API Client for PHP 
+# Lime Light CRM API Client for PHP
+
+A fork of Kevin Em's limelight SDK, this one includes both v1 and v2 API's
+as well as the legacy version. 
 
 https://www.limelightcrm.com/
 
@@ -30,7 +33,7 @@ $limelightCRM = new LimeLightCRM([
 ], $gClient);
 
 $limelightCRM->prospects()->newProspect([
-	'campaignId' => 1,
+    'campaignId' => 1,
     'firstName'  => 'John',
     'lastName' => 'Doe',
     'email' => 'jdoe@gmail.com',

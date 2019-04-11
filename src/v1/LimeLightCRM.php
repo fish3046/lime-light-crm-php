@@ -6,6 +6,7 @@ namespace KevinEm\LimeLightCRM\v1;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\RequestOptions;
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException;
+use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
 
 /**
  * For use with version 1 of limelight API
@@ -57,10 +58,12 @@ class LimeLightCRM
      * @param string $method
      * @param array  $data
      * @param string $httpMethod
-     * @return array
+     * @return Response
+     * @throws LimeLightCRMGenericException
+     * @throws LimeLightCRMParseResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function makeRequest(string $method, array $data, string $httpMethod)
+    public function makeRequest(string $method, array $data, string $httpMethod): Response
     {
         $authParams = $this->getAuth();
 
@@ -150,92 +153,74 @@ class LimeLightCRM
      * Parse response returned by LimeLightCRM into an array
      *
      * @param $response
-     * @return array
+     * @return Response
+     * @throws LimeLightCRMParseResponseException
      */
-    public function parseResponse($response)
+    public function parseResponse($response): Response
     {
         $array = json_decode($response, true);
 
-        return $array;
+        if (is_null($array)) {
+            throw new LimeLightCRMParseResponseException('Cannot understand limelight response', 0, null);
+        }
+
+        return new Response($array);
     }
 
     /**
-     * @param array $response
+     * @param Response $response
      * @throws LimeLightCRMGenericException
      */
-    public function checkResponse(array $response)
+    public function checkResponse(Response $response)
     {
         $exception = null;
 
-        if (isset($response['response_code']) && $response['response_code'] != 100) {
+        if (!$response->isSuccess()) {
             $message = '';
             if (isset($response['error_message'])) {
                 $message = $response['error_message'];
             }
-            throw new LimeLightCRMGenericException($message, $response['response_code'], null, $response);
+
+            throw new LimeLightCRMGenericException($message, $response['response_code'], null, $response->toArray());
         }
     }
 
-    /**
-     * @return Credentials
-     */
-    public function credentials()
+    public function credentials(): Credentials
     {
         return new Credentials($this);
     }
 
-    /**
-     * @return Products
-     */
-    public function products()
+    public function products(): Products
     {
         return new Products($this);
     }
 
-    /**
-     * @return Shippings
-     */
-    public function shippings()
+    public function shippings(): Shippings
     {
         return new Shippings($this);
     }
 
-    /**
-     * @return Campaigns
-     */
-    public function campaigns()
+    public function campaigns(): Campaigns
     {
         return new Campaigns($this);
     }
 
-    /**
-     * @return Prospects
-     */
-    public function prospects()
+    public function prospects(): Prospects
     {
         return new Prospects($this);
     }
 
-    /**
-     * @return Payments
-     */
-    public function payments()
+    public function payments(): Payments
     {
         return new Payments($this);
     }
 
-    /**
-     * @return Orders
-     */
-    public function orders()
+    public function orders(): Orders
     {
         return new Orders($this);
     }
 
-    /**
-     * @return Customers
-     */
-    public function customers()
+    public function customers(): Customers
     {
         return new Customers($this);
     }

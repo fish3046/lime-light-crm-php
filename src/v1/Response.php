@@ -36,4 +36,9 @@ class Response implements ArrayAccess
     {
         unset($this->data[$offset]);
     }
+
+    public function toArray(): array
+    {
+        return $this->data;
+    }
 }

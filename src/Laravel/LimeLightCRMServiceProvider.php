@@ -18,6 +18,7 @@ class LimeLightCRMServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerV1Engine();
+        $this->registerV2Engine();
     }
 
     private function registerV1Engine()

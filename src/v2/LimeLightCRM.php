@@ -3,7 +3,10 @@
 namespace KevinEm\LimeLightCRM\v2;
 
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\RequestOptions;
+use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException;
+use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
 
 /**
  * For use with version 2 of limelight API
@@ -57,6 +60,8 @@ class LimeLightCRM
      * @param string $httpMethod
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws LimeLightCRMGenericException
+     * @throws LimeLightCRMParseResponseException
      */
     public function makeRequest(string $url, array $data, string $httpMethod = 'POST'): array
     {
@@ -66,14 +71,21 @@ class LimeLightCRM
 
         $requestOptions = array_merge($authParams, $formParams);
 
-        // We need to either wrap the guzzle execution in a try...catch or turn HTTP_ERRORS exceptions
-        // off so the calling project can deal with the body themselves.
-        $requestOptions[RequestOptions::HTTP_ERRORS] = false;
+        try {
+            $res    = $this->getResponse($httpMethod, $url, $requestOptions);
+            $parsed = $this->parseResponse($res);
+        } catch (BadResponseException $ex) {
+            $res    = $ex->getResponse()->getBody()->getContents();
+            $parsed = $this->parseResponse($res);
 
-        $res     = $this->getResponse($httpMethod, $url, $requestOptions);
-        $parsed  = $this->parseResponse($res);
+            // Try and pull error message from response body
+            $message = '';
+            if (isset($parsed['message'])) {
+                $message = $parsed['message'];
+            }
 
-        $this->checkResponse($parsed);
+            throw new LimeLightCRMGenericException($message, $ex->getResponse()->getStatusCode(), $ex, $parsed);
+        }
 
         return $parsed;
     }
@@ -81,10 +93,10 @@ class LimeLightCRM
     /**
      * @return array
      */
-    public function getAuth()
+    public function getAuth(): array
     {
         return [
-            RequestOptions::AUTH => [$this->username,$this->password],
+            RequestOptions::AUTH => [$this->username, $this->password],
         ];
     }
 
@@ -112,7 +124,7 @@ class LimeLightCRM
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getResponse($method, $uri, array $options = [])
+    public function getResponse($method, $uri, array $options = []): string
     {
         $res = $this->getHttpClient()->request($method, $uri, $options);
 
@@ -143,38 +155,20 @@ class LimeLightCRM
      *
      * @param $response
      * @return array
+     * @throws LimeLightCRMParseResponseException
      */
     public function parseResponse($response)
     {
         $array = json_decode($response, true);
 
+        if (is_null($array)) {
+            throw new LimeLightCRMParseResponseException('Cannot understand limelight response', 0, null);
+        }
+
         return $array;
     }
 
-    /**
-     * @param array $response
-     * @throws LimeLightCRMTransactionException
-     */
-    public function checkResponse(array $response)
-    {
-        /*$exception = null;
-
-        if (isset($response['response_code'])) {
-            $responses = explode(',', $response['response_code']);
-
-            foreach ($responses as $code) {
-                if (!in_array($code, [100])) {
-                    $exception = new LimeLightCRMTransactionException($code, $exception, $response);
-                }
-            }
-        }
-
-        if (isset($exception)) {
-            throw $exception;
-        }*/
-    }
-
-    public function prospects()
+    public function prospects(): Prospects
     {
         return new Prospects($this);
     }

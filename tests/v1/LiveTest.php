@@ -2,6 +2,7 @@
 namespace KevinEm\LimeLightCRM\Tests\v1;
 
 use GuzzleHttp\Client;
+use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException;
 use KevinEm\LimeLightCRM\v1\LimeLightCRM;
 use PHPUnit\Framework\TestCase;
 
@@ -159,6 +160,36 @@ class LiveTest extends TestCase
                 'auth_amount'      => '1',
                 'save_customer'    => '1',
             ]);
+
+        echo json_encode($resp);
+        var_dump($resp);
+    }
+
+    public function testSubscriptionOrderUpdate()
+    {
+        /*
+        Stop recurring subscription
+        [
+            'order_id' => '10001',
+            'product_id' => '1',
+            'status'   => 'stop',
+        ]
+        */
+
+        try {
+            $resp = $this->service
+                ->orders()
+                ->subscriptionOrderUpdate([
+                    'order_id'                 => '10004',
+                    'product_id'               => '1',
+                    'new_recurring_price'      => '5.00',
+                    'new_recurring_product_id' => 1,
+                    'preserve_new_recurring_price' => 1,
+                ]);
+        } catch (LimeLightCRMGenericException $ex) {
+            echo "EXCEPTION\n";
+            $resp = $ex->getResponse();
+        }
 
         echo json_encode($resp);
         var_dump($resp);

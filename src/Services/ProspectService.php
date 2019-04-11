@@ -3,6 +3,11 @@ namespace KevinEm\LimeLightCRM\Services;
 
 use KevinEm\LimeLightCRM\v1\LimeLightCRM;
 
+/**
+ * Helper functions for dealing with prospects
+ *
+ * @package KevinEm\LimeLightCRM\Services
+ */
 class ProspectService
 {
     /**
@@ -20,7 +25,13 @@ class ProspectService
         $this->v2Engine = $v2Engine;
     }
 
-    public function addProspectWithCustomFields($prospectData, array $customFields = [])
+    /**
+     * @param       $prospectData
+     * @param array $customFields
+     * @return int                  Prospect ID
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function addProspectWithCustomFields($prospectData, array $customFields = []): int
     {
         $resp = $this->v1Engine
             ->prospects()
@@ -28,8 +39,10 @@ class ProspectService
 
         $prospectId = $resp['prospectId'];
 
-        $cfResp = $this->v2Engine
+        $this->v2Engine
             ->prospects()
             ->addCustomFieldValues($prospectId, $customFields);
+
+        return (int)$prospectId;
     }
 }
