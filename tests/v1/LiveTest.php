@@ -103,25 +103,40 @@ class LiveTest extends TestCase
         $resp = $this->service
             ->orders()
             ->newOrder([
-                'creditCardNumber' => '1444444444444440',
+//                'creditCardNumber' => '1444444444444440',
+                'creditCardNumber' => '1444444444444441',
                 'expirationDate'   => '0628',
                 'CVV'              => '123',
                 'creditCardType'   => 'VISA',     // Will say "Invalid payment type" if this is missing
-                'tranType'         => 'Sale',
+                'tranType'         => 'AUTH',
                 'shippingId'       => 2,          // Shipping info is currently required by their API.  they plan on fixing that "soon"
                 'shippingAddress1' => '123',
                 'shippingCity'     => '123',
                 'shippingState'    => '123',
                 'shippingZip'      => '123',
+                'campaignId'       => 1,
                 'offers'           => [
                     [
                         'offer_id'         => 1,
                         'product_id'       => 1,
                         'billing_model_id' => 3,
+                        'trial' => [
+                            'product_id' => 1
+                        ]
                     ]
                 ],
                 'shippingCountry'  => 'GB',
-                'temp_customer_id' => 'da66a4d1690505dc4da311bb0cc5dd56',
+                'firstName' => 'another',
+                'lastName' => 'name',
+                'billingAddress1' => 'name',
+                'billingCity' => 'name',
+                'billingState' => 'name',
+                'billingZip' => 'name',
+                'billingCountry' => 'GB',
+                'email' => 'fda@email.org',
+                'ipAddress' => '87.78.78.78',
+                'phone' => '01111111111',
+//                'temp_customer_id' => 'da66a4d1690505dc4da311bb0cc5dd56',
             ]);
 
         echo json_encode($resp);

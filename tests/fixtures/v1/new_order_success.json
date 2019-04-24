@@ -1,0 +1,18 @@
+{
+  "gateway_id": "1",
+  "response_code": "100",
+  "error_found": "0",
+  "order_id": "10009",
+  "transactionID": "Not Available",
+  "customerId": "3",
+  "authId": "Not Available",
+  "orderTotal": "0.00",
+  "orderSalesTaxPercent": "0.00",
+  "orderSalesTaxAmount": "0.00",
+  "test": "1",
+  "prepaid_match": "0",
+  "subscription_id": {
+    "1": "5350cceeb841b0a80bf6182e5aa02b8f"
+  },
+  "resp_msg": "Approved"
+}

@@ -2,8 +2,9 @@
 namespace KevinEm\LimeLightCRM\v1;
 
 use ArrayAccess;
+use JsonSerializable;
 
-class Response implements ArrayAccess
+class Response implements ArrayAccess, JsonSerializable
 {
     protected $data;
 
@@ -38,6 +39,11 @@ class Response implements ArrayAccess
     }
 
     public function toArray(): array
+    {
+        return $this->data;
+    }
+
+    public function jsonSerialize()
     {
         return $this->data;
     }
