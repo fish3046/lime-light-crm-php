@@ -80,6 +80,15 @@ class Orders extends AbstractService
         return $this->makeRequest('order_product_return', $data);
     }
 
+    /**
+     * @param int  $orderId
+     * @param      $amount
+     * @param bool $keepRecurring   If false, all products attached to the order ID will cancel recurring subscriptions
+     * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException
+     * @throws \KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException
+     */
     public function orderRefund(int $orderId, $amount, bool $keepRecurring = true)
     {
         return $this->makeRequest('order_refund', [
