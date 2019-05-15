@@ -4,14 +4,36 @@
 namespace KevinEm\LimeLightCRM\v1;
 
 
+use KevinEm\LimeLightCRM\v1\DTO\AuthorizePayment;
+
 /**
  * Class Orders
+ *
  * @package KevinEm/LimeLightCRM/v1
  */
 class Orders extends AbstractService
 {
-    public function authorizePayment(array $data)
+    /**
+     * This method utilizes the billing and card data fields used by new_order, as well
+     * as some basic CRM identifiers for campaign and product, and sends an authorization
+     * request to the gateway. No order is created. Upon successful authorization, the
+     * transaction information will be returned, otherwise the decline reason is provided.
+     * If no auth_amount is provided, it will default to a 1.00 authorization.
+     *
+     * @param array|AuthorizePayment $data
+     * @return Response
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException
+     * @throws \KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException
+     */
+    public function authorizePayment($data)
     {
+        if ($data instanceof AuthorizePayment) {
+            $data = $data->toArray();
+        } elseif (!is_array($data)) {
+            throw new \InvalidArgumentException("Must supply either an array or a DTO");
+        }
+
         return $this->makeRequest('authorize_payment', $data);
     }
 
