@@ -1,13 +1,17 @@
 <?php
 namespace KevinEm\LimeLightCRM;
 
+use KevinEm\LimeLightCRM\Traits\ArrayableTrait;
+
 /**
  * DTO for data passed to our application from limelight in a post back
  *
  * @package KevinEm\LimeLightCRM
  */
-class PostBackModel
+class PostBackModel implements \JsonSerializable
 {
+    use ArrayableTrait;
+
     protected $affid;
     protected $affiliate;
     protected $afid;
@@ -362,6 +366,7 @@ class PostBackModel
     }
 
     /**
+     * Currency code: USD, EUR, GBP, CAD, AUD, ZAR, JPY
      * @return mixed
      */
     public function getCurrencyCode()
@@ -378,6 +383,7 @@ class PostBackModel
     }
 
     /**
+     * If order_status = 0, this value will be the decline reason from the payment gateway.
      * @return mixed
      */
     public function getDeclineReason()
@@ -386,6 +392,7 @@ class PostBackModel
     }
 
     /**
+     * Discount applied as a result of subscription management decline salvage settings.
      * @return mixed
      */
     public function getDeclineSalvageDiscount()
@@ -394,6 +401,7 @@ class PostBackModel
     }
 
     /**
+     * If using supported membership providers, the value of the password generated
      * @return mixed
      */
     public function getDigitalDeliveryPassword()
@@ -402,6 +410,7 @@ class PostBackModel
     }
 
     /**
+     * If using supported membership providers, the value of the username generated
      * @return mixed
      */
     public function getDigitalDeliveryUsername()
@@ -450,6 +459,9 @@ class PostBackModel
     }
 
     /**
+     * This flag indicates whether this order was marked automatically as fraud by
+     * a fraud provider mid-way in the transaction.
+     *
      * @return mixed
      */
     public function getIsFraud()
@@ -458,6 +470,7 @@ class PostBackModel
     }
 
     /**
+     * 1 if it is a gift order, 0 if it is not a gift order
      * @return mixed
      */
     public function getIsGift()
@@ -482,6 +495,7 @@ class PostBackModel
     }
 
     /**
+     * This flag indicates whether this is a test credit card or not
      * @return mixed
      */
     public function getIsTestCc()
@@ -514,6 +528,7 @@ class PostBackModel
     }
 
     /**
+     * DateTime of Order mm/dd/yyyy hh:mm:ss. Where hours are in military time 00-24
      * @return mixed
      */
     public function getOrderDateTime()
@@ -538,6 +553,7 @@ class PostBackModel
     }
 
     /**
+     * 1 For Approvals, 0 For Declines
      * @return mixed
      */
     public function getOrderStatus()
@@ -562,6 +578,7 @@ class PostBackModel
     }
 
     /**
+     * Payment Method Of Order: VISA, DISCOVER, MASTERCARD, AMERICAN EXPRESS, OFFLINE, CHECK or UNKNOWN
      * @return mixed
      */
     public function getPaymentMethod()
@@ -826,10 +843,19 @@ class PostBackModel
     }
 
     /**
+     * This flag indicates that the order was salvaged from a decline. 0 Means no, 1 means
+     * was reprocessed through decline salvage on orders, 2 means the recurring billing
+     * salvaged after retry
+     *
      * @return mixed
      */
     public function getWasReprocessed()
     {
         return $this->was_reprocessed;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
