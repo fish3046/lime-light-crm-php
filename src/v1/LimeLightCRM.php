@@ -179,6 +179,8 @@ class LimeLightCRM
             $message = '';
             if (isset($response['error_message'])) {
                 $message = $response['error_message'];
+            } elseif (isset($response['response_message'])) {
+                $message = $response['response_message'];
             }
 
             throw new LimeLightCRMGenericException($message, $response['response_code'], null, $response->toArray());
