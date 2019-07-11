@@ -15,7 +15,15 @@ class Response implements ArrayAccess, JsonSerializable
 
     public function isSuccess(): bool
     {
-        return $this->data['response_code'] == 100;
+        $respCode = $this->data['response_code'];
+
+        // 100 is traditional success
+        //
+        // 343 per the documentation is "Data Element Has Same Value As Value Passed No Update done
+        // (Information ONLY, but still a success)".  I have seen this used when stopping a subscription
+        // twice in a row.  I am considering this a success, as the object is in the desired state when
+        // the operation is done, so we don't need to act further.
+        return $respCode == 100 || $respCode == 343;
     }
 
     public function offsetExists($offset)

@@ -70,4 +70,22 @@ class LimeLightCRMTest extends TestCase
             $this->assertEquals($jsonExpectedResponse, $ex->getResponse());
         }
     }
+
+    public function test343IsSuccess()
+    {
+        $rawExpectedResponse  = '{"response_code": "343","error_found": "Everything is fine"}';
+        $mock = new MockHandler([
+            new Response(200, [], $rawExpectedResponse),
+        ]);
+
+        $handler = HandlerStack::create($mock);
+        $client = new Client(['handler' => $handler]);
+
+        $s = new LimeLightCRM($client, []);
+
+        $resp = $s->makeRequest('', [], 'POST');
+
+        $this->assertTrue($resp->isSuccess());
+        $this->assertEquals(343, $resp['response_code']);
+    }
 }
