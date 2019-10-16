@@ -177,9 +177,9 @@ class LimeLightCRM
 
         if (!$response->isSuccess()) {
             $message = '';
-            if (isset($response['error_message'])) {
+            if (isset($response['error_message']) && is_string($response['error_message'])) {
                 $message = $response['error_message'];
-            } elseif (isset($response['response_message'])) {
+            } elseif (isset($response['response_message']) && is_string($response['response_message'])) {
                 $message = $response['response_message'];
             }
 
