@@ -835,6 +835,14 @@ class PostBackModel implements \JsonSerializable
     }
 
     /**
+     * This is the CUMULATIVE amount of all refunds against the original charge, not the amount of just this
+     * event.  If the original charge was for 20, there was one previous partial refund of 5, then a second
+     * refund of 10, the second void_refund_amount will be 15.
+     *
+     * There is no field for the value of just this specific refund event.  After speaking with their customer
+     * service team in 2021-06, adding that field would be "a very large task since we don't have it broken
+     * down that way"
+     *
      * @return mixed
      */
     public function getVoidRefundAmount()
