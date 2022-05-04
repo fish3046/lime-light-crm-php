@@ -1,6 +1,6 @@
 {
   "name": "fish3046/lime-light-crm-php",
-  "description": "Lime Light CRM v1 PHP Client",
+  "description": "Sticky.io CRM v1 PHP Client",
   "require": {
     "php": ">=7.1.0",
     "ext-json": "*",

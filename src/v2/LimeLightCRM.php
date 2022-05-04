@@ -45,7 +45,7 @@ class LimeLightCRM
      */
     public function __construct(ClientInterface $client, array $options)
     {
-        $this->baseUrl  = rtrim($options['base_url'], '\\');
+        $this->baseUrl  = rtrim((string)$options['base_url'], '\\');
         $this->username = $options['username'];
         $this->password = $options['password'];
 
