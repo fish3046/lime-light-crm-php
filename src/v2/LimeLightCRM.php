@@ -16,11 +16,7 @@ use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
  */
 class LimeLightCRM
 {
-
-    /**
-     * @var ClientInterface
-     */
-    protected $httpClient;
+    protected ClientInterface $httpClient;
 
     /**
      * @var string
@@ -157,7 +153,7 @@ class LimeLightCRM
      * @return array
      * @throws LimeLightCRMParseResponseException
      */
-    public function parseResponse($response)
+    public function parseResponse($response): array
     {
         $array = json_decode($response, true);
 

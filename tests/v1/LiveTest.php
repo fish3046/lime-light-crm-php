@@ -14,12 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class LiveTest extends TestCase
 {
-    /**
-     * @var LimeLightCRM
-     */
-    protected $service;
+    protected LimeLightCRM $service;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,6 +28,22 @@ class LiveTest extends TestCase
 
         $c             = new Client();
         $this->service = new LimeLightCRM($c, $auth);
+    }
+
+    public function testChangeSubscriptionPrice()
+    {
+        $resp = $this->service
+            ->orders()
+            ->subscriptionOrderUpdate([
+                'order_id'                     => 221913,
+                'product_id'                   => 1,
+                'new_recurring_price'          => 9.99,
+                'new_recurring_product_id'     => 1,
+                'preserve_new_recurring_price' => 1,
+            ]);
+
+        echo json_encode($resp);
+        var_dump($resp);
     }
 
     public function testNewProspect()
@@ -145,9 +158,14 @@ class LiveTest extends TestCase
 
     public function testOrderRefund()
     {
-        $resp = $this->service
-            ->orders()
-            ->orderRefund(10001, 5.4);
+        try {
+            $resp = $this->service
+                ->orders()
+                ->orderRefund(1038692, 20);
+        } catch (LimeLightCRMGenericException $ex) {
+            var_dump($ex->getMessage());
+            var_dump($ex->getResponse());
+        }
 
         echo json_encode($resp);
         var_dump($resp);
@@ -192,6 +210,57 @@ class LiveTest extends TestCase
                 ]);
         } catch (LimeLightCRMGenericException $ex) {
             echo "EXCEPTION\n";
+            $resp = $ex->getResponse();
+        }
+
+        echo json_encode($resp);
+        var_dump($resp);
+    }
+
+    public function testOrderView()
+    {
+        try {
+            $resp = $this->service
+                ->orders()
+                ->orderView([209492]);
+        } catch (LimeLightCRMGenericException $ex) {
+            echo "EXCEPTION\n";
+            $resp = $ex->getResponse();
+        }
+
+        echo json_encode($resp);
+        var_dump($resp);
+    }
+
+    public function testSubscriptionHold()
+    {
+        try {
+            $resp = $this->service
+                ->orders()
+                ->subscriptionOrderUpdate([
+                    'order_id'   => 31456,
+                    'product_id' => 1,
+                    'status'     => 'stop',
+                ]);
+        } catch (LimeLightCRMGenericException $ex) {
+            echo "EXCEPTION\n";
+            echo $ex->getMessage();
+            $resp = $ex->getResponse();
+        }
+
+        echo json_encode($resp);
+        var_dump($resp);
+    }
+
+    public function testOrderVoid()
+    {
+        try {
+            $resp = $this->service
+                ->orders()
+                ->orderVoid(47971);
+        } catch (LimeLightCRMGenericException $ex) {
+            echo "EXCEPTION\n";
+            echo $ex->getMessage();
             $resp = $ex->getResponse();
         }
 

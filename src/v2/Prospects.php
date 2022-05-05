@@ -4,18 +4,18 @@ namespace KevinEm\LimeLightCRM\v2;
 
 class Prospects extends AbstractService
 {
-    public function getProspectCustomFields()
+    public function getProspectCustomFields(): array
     {
         return $this->makeRequest('/api/v2/custom_fields/prospects', [], 'GET');
     }
 
     /**
      * @param string $prospectId
-     * @param array  $values        Keys of field ID, values of new value: [256 => 'new value']
+     * @param array  $values Keys of field ID, values of new value: [256 => 'new value']
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function addCustomFieldValues(string $prospectId, array $values)
+    public function addCustomFieldValues(string $prospectId, array $values): array
     {
         $url = sprintf('/api/v2/prospects/%s/custom_fields', $prospectId);
 
@@ -24,18 +24,18 @@ class Prospects extends AbstractService
 
     /**
      * @param string $prospectId
-     * @param array  $values        Keys of field ID, values of new value: [256 => 'new value']
+     * @param array  $values Keys of field ID, values of new value: [256 => 'new value']
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function updateCustomFieldValues(string $prospectId, array $values)
+    public function updateCustomFieldValues(string $prospectId, array $values): array
     {
         $url = sprintf('/api/v2/prospects/%s/custom_fields', $prospectId);
 
         return $this->makeRequest($url, $this->convertToCustomFieldsArray($values), 'PUT');
     }
 
-    public function deleteCustomFieldValues(string $prospectId, int $customFieldId)
+    public function deleteCustomFieldValues(string $prospectId, int $customFieldId): array
     {
         $url = sprintf('/api/v2/prospects/%s/custom_fields/%s', $prospectId, $customFieldId);
 

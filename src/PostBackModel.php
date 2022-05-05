@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM;
 
 use KevinEm\LimeLightCRM\Traits\ArrayableTrait;
@@ -94,91 +95,91 @@ class PostBackModel implements \JsonSerializable
     protected $transaction_id;
     protected $void_refund_amount;
     protected $was_reprocessed;
-    
+
     public function __construct(array $data = [])
     {
-        $this->affid                     = isset($data['affid']) ? $data['affid'] : null;
-        $this->affiliate                 = isset($data['affiliate']) ? $data['affiliate'] : null;
-        $this->afid                      = isset($data['afid']) ? $data['afid'] : null;
-        $this->aid                       = isset($data['aid']) ? $data['aid'] : null;
-        $this->ancestor_id               = isset($data['ancestor_id']) ? $data['ancestor_id'] : null;
-        $this->authorization_id          = isset($data['authorization_id']) ? $data['authorization_id'] : null;
-        $this->billing_address_2         = isset($data['billing_address_2']) ? $data['billing_address_2'] : null;
-        $this->billing_address           = isset($data['billing_address']) ? $data['billing_address'] : null;
-        $this->billing_city              = isset($data['billing_city']) ? $data['billing_city'] : null;
-        $this->billing_country           = isset($data['billing_country']) ? $data['billing_country'] : null;
-        $this->billing_state_desc        = isset($data['billing_state_desc']) ? $data['billing_state_desc'] : null;
-        $this->billing_state_id          = isset($data['billing_state_id']) ? $data['billing_state_id'] : null;
-        $this->billing_zip               = isset($data['billing_zip']) ? $data['billing_zip'] : null;
-        $this->c1                        = isset($data['c1']) ? $data['c1'] : null;
-        $this->c2                        = isset($data['c2']) ? $data['c2'] : null;
-        $this->c3                        = isset($data['c3']) ? $data['c3'] : null;
-        $this->campaign_desc             = isset($data['campaign_desc']) ? $data['campaign_desc'] : null;
-        $this->campaign_id               = isset($data['campaign_id']) ? $data['campaign_id'] : null;
-        $this->campaign_name             = isset($data['campaign_name']) ? $data['campaign_name'] : null;
-        $this->cb_service_outcome        = isset($data['cb_service_outcome']) ? $data['cb_service_outcome'] : null;
-        $this->cb_service_source         = isset($data['cb_service_source']) ? $data['cb_service_source'] : null;
-        $this->cb_service_type           = isset($data['cb_service_type']) ? $data['cb_service_type'] : null;
-        $this->click_id                  = isset($data['click_id']) ? $data['click_id'] : null;
-        $this->currency_code             = isset($data['currency_code']) ? $data['currency_code'] : null;
-        $this->customer_id               = isset($data['customer_id']) ? $data['customer_id'] : null;
-        $this->decline_reason            = isset($data['decline_reason']) ? $data['decline_reason'] : null;
-        $this->decline_salvage_discount  = isset($data['decline_salvage_discount']) ? $data['decline_salvage_discount'] : null;
-        $this->digital_delivery_password = isset($data['digital_delivery_password']) ? $data['digital_delivery_password'] : null;
-        $this->digital_delivery_username = isset($data['digital_delivery_username']) ? $data['digital_delivery_username'] : null;
-        $this->email                     = isset($data['email']) ? $data['email'] : null;
-        $this->first_name                = isset($data['first_name']) ? $data['first_name'] : null;
-        $this->gateway_id                = isset($data['gateway_id']) ? $data['gateway_id'] : null;
-        $this->ip_address                = isset($data['ip_address']) ? $data['ip_address'] : null;
-        $this->ischargeback              = isset($data['ischargeback']) ? $data['ischargeback'] : null;
-        $this->is_fraud                  = isset($data['is_fraud']) ? $data['is_fraud'] : null;
-        $this->is_gift                   = isset($data['is_gift']) ? $data['is_gift'] : null;
-        $this->is_recurring              = isset($data['is_recurring']) ? $data['is_recurring'] : null;
-        $this->is_shippable              = isset($data['is_shippable']) ? $data['is_shippable'] : null;
-        $this->is_test_cc                = isset($data['is_test_cc']) ? $data['is_test_cc'] : null;
-        $this->last_name                 = isset($data['last_name']) ? $data['last_name'] : null;
-        $this->non_taxable_amount        = isset($data['non_taxable_amount']) ? $data['non_taxable_amount'] : null;
-        $this->opt                       = isset($data['opt']) ? $data['opt'] : null;
-        $this->order_date_time           = isset($data['order_date_time']) ? $data['order_date_time'] : null;
-        $this->order_date                = isset($data['order_date']) ? $data['order_date'] : null;
-        $this->order_id                  = isset($data['order_id']) ? $data['order_id'] : null;
-        $this->order_status              = isset($data['order_status']) ? $data['order_status'] : null;
-        $this->order_total               = isset($data['order_total']) ? $data['order_total'] : null;
-        $this->parent_order_id           = isset($data['parent_order_id']) ? $data['parent_order_id'] : null;
-        $this->payment_method            = isset($data['payment_method']) ? $data['payment_method'] : null;
-        $this->phone                     = isset($data['phone']) ? $data['phone'] : null;
-        $this->post_back_action          = isset($data['post_back_action']) ? $data['post_back_action'] : null;
-        $this->product_id_csv            = isset($data['product_id_csv']) ? $data['product_id_csv'] : null;
-        $this->product_names_csv         = isset($data['product_names_csv']) ? $data['product_names_csv'] : null;
-        $this->product_prices_csv        = isset($data['product_prices_csv']) ? $data['product_prices_csv'] : null;
-        $this->product_qtys_csv          = isset($data['product_qtys_csv']) ? $data['product_qtys_csv'] : null;
-        $this->product_skus_csv          = isset($data['product_skus_csv']) ? $data['product_skus_csv'] : null;
-        $this->rebill_depth              = isset($data['rebill_depth']) ? $data['rebill_depth'] : null;
-        $this->rebill_discount           = isset($data['rebill_discount']) ? $data['rebill_discount'] : null;
-        $this->recurring_date            = isset($data['recurring_date']) ? $data['recurring_date'] : null;
-        $this->retry_attempt             = isset($data['retry_attempt']) ? $data['retry_attempt'] : null;
-        $this->sales_tax_percent         = isset($data['sales_tax_percent']) ? $data['sales_tax_percent'] : null;
-        $this->shipping_address_2        = isset($data['shipping_address_2']) ? $data['shipping_address_2'] : null;
-        $this->shipping_address          = isset($data['shipping_address']) ? $data['shipping_address'] : null;
-        $this->shipping_city             = isset($data['shipping_city']) ? $data['shipping_city'] : null;
-        $this->shipping_country          = isset($data['shipping_country']) ? $data['shipping_country'] : null;
-        $this->shipping_group_name       = isset($data['shipping_group_name']) ? $data['shipping_group_name'] : null;
-        $this->shipping_id               = isset($data['shipping_id']) ? $data['shipping_id'] : null;
-        $this->shipping_method           = isset($data['shipping_method']) ? $data['shipping_method'] : null;
-        $this->shipping_state_desc       = isset($data['shipping_state_desc']) ? $data['shipping_state_desc'] : null;
-        $this->shipping_state_id         = isset($data['shipping_state_id']) ? $data['shipping_state_id'] : null;
-        $this->shipping_total            = isset($data['shipping_total']) ? $data['shipping_total'] : null;
-        $this->shipping_zip              = isset($data['shipping_zip']) ? $data['shipping_zip'] : null;
-        $this->sid                       = isset($data['sid']) ? $data['sid'] : null;
-        $this->subscription_active_csv   = isset($data['subscription_active_csv']) ? $data['subscription_active_csv'] : null;
-        $this->subscription_id_csv       = isset($data['subscription_id_csv']) ? $data['subscription_id_csv'] : null;
-        $this->sub_affiliate             = isset($data['sub_affiliate']) ? $data['sub_affiliate'] : null;
-        $this->taxable_amount            = isset($data['taxable_amount']) ? $data['taxable_amount'] : null;
-        $this->tax_factor                = isset($data['tax_factor']) ? $data['tax_factor'] : null;
-        $this->total_no_shipping         = isset($data['total_no_shipping']) ? $data['total_no_shipping'] : null;
-        $this->transaction_id            = isset($data['transaction_id']) ? $data['transaction_id'] : null;
-        $this->void_refund_amount        = isset($data['void_refund_amount']) ? $data['void_refund_amount'] : null;
-        $this->was_reprocessed           = isset($data['was_reprocessed']) ? $data['was_reprocessed'] : null;
+        $this->affid                     = $data['affid'] ?? null;
+        $this->affiliate                 = $data['affiliate'] ?? null;
+        $this->afid                      = $data['afid'] ?? null;
+        $this->aid                       = $data['aid'] ?? null;
+        $this->ancestor_id               = $data['ancestor_id'] ?? null;
+        $this->authorization_id          = $data['authorization_id'] ?? null;
+        $this->billing_address_2         = $data['billing_address_2'] ?? null;
+        $this->billing_address           = $data['billing_address'] ?? null;
+        $this->billing_city              = $data['billing_city'] ?? null;
+        $this->billing_country           = $data['billing_country'] ?? null;
+        $this->billing_state_desc        = $data['billing_state_desc'] ?? null;
+        $this->billing_state_id          = $data['billing_state_id'] ?? null;
+        $this->billing_zip               = $data['billing_zip'] ?? null;
+        $this->c1                        = $data['c1'] ?? null;
+        $this->c2                        = $data['c2'] ?? null;
+        $this->c3                        = $data['c3'] ?? null;
+        $this->campaign_desc             = $data['campaign_desc'] ?? null;
+        $this->campaign_id               = $data['campaign_id'] ?? null;
+        $this->campaign_name             = $data['campaign_name'] ?? null;
+        $this->cb_service_outcome        = $data['cb_service_outcome'] ?? null;
+        $this->cb_service_source         = $data['cb_service_source'] ?? null;
+        $this->cb_service_type           = $data['cb_service_type'] ?? null;
+        $this->click_id                  = $data['click_id'] ?? null;
+        $this->currency_code             = $data['currency_code'] ?? null;
+        $this->customer_id               = $data['customer_id'] ?? null;
+        $this->decline_reason            = $data['decline_reason'] ?? null;
+        $this->decline_salvage_discount  = $data['decline_salvage_discount'] ?? null;
+        $this->digital_delivery_password = $data['digital_delivery_password'] ?? null;
+        $this->digital_delivery_username = $data['digital_delivery_username'] ?? null;
+        $this->email                     = $data['email'] ?? null;
+        $this->first_name                = $data['first_name'] ?? null;
+        $this->gateway_id                = $data['gateway_id'] ?? null;
+        $this->ip_address                = $data['ip_address'] ?? null;
+        $this->ischargeback              = $data['ischargeback'] ?? null;
+        $this->is_fraud                  = $data['is_fraud'] ?? null;
+        $this->is_gift                   = $data['is_gift'] ?? null;
+        $this->is_recurring              = $data['is_recurring'] ?? null;
+        $this->is_shippable              = $data['is_shippable'] ?? null;
+        $this->is_test_cc                = $data['is_test_cc'] ?? null;
+        $this->last_name                 = $data['last_name'] ?? null;
+        $this->non_taxable_amount        = $data['non_taxable_amount'] ?? null;
+        $this->opt                       = $data['opt'] ?? null;
+        $this->order_date_time           = $data['order_date_time'] ?? null;
+        $this->order_date                = $data['order_date'] ?? null;
+        $this->order_id                  = $data['order_id'] ?? null;
+        $this->order_status              = $data['order_status'] ?? null;
+        $this->order_total               = $data['order_total'] ?? null;
+        $this->parent_order_id           = $data['parent_order_id'] ?? null;
+        $this->payment_method            = $data['payment_method'] ?? null;
+        $this->phone                     = $data['phone'] ?? null;
+        $this->post_back_action          = $data['post_back_action'] ?? null;
+        $this->product_id_csv            = $data['product_id_csv'] ?? null;
+        $this->product_names_csv         = $data['product_names_csv'] ?? null;
+        $this->product_prices_csv        = $data['product_prices_csv'] ?? null;
+        $this->product_qtys_csv          = $data['product_qtys_csv'] ?? null;
+        $this->product_skus_csv          = $data['product_skus_csv'] ?? null;
+        $this->rebill_depth              = $data['rebill_depth'] ?? null;
+        $this->rebill_discount           = $data['rebill_discount'] ?? null;
+        $this->recurring_date            = $data['recurring_date'] ?? null;
+        $this->retry_attempt             = $data['retry_attempt'] ?? null;
+        $this->sales_tax_percent         = $data['sales_tax_percent'] ?? null;
+        $this->shipping_address_2        = $data['shipping_address_2'] ?? null;
+        $this->shipping_address          = $data['shipping_address'] ?? null;
+        $this->shipping_city             = $data['shipping_city'] ?? null;
+        $this->shipping_country          = $data['shipping_country'] ?? null;
+        $this->shipping_group_name       = $data['shipping_group_name'] ?? null;
+        $this->shipping_id               = $data['shipping_id'] ?? null;
+        $this->shipping_method           = $data['shipping_method'] ?? null;
+        $this->shipping_state_desc       = $data['shipping_state_desc'] ?? null;
+        $this->shipping_state_id         = $data['shipping_state_id'] ?? null;
+        $this->shipping_total            = $data['shipping_total'] ?? null;
+        $this->shipping_zip              = $data['shipping_zip'] ?? null;
+        $this->sid                       = $data['sid'] ?? null;
+        $this->subscription_active_csv   = $data['subscription_active_csv'] ?? null;
+        $this->subscription_id_csv       = $data['subscription_id_csv'] ?? null;
+        $this->sub_affiliate             = $data['sub_affiliate'] ?? null;
+        $this->taxable_amount            = $data['taxable_amount'] ?? null;
+        $this->tax_factor                = $data['tax_factor'] ?? null;
+        $this->total_no_shipping         = $data['total_no_shipping'] ?? null;
+        $this->transaction_id            = $data['transaction_id'] ?? null;
+        $this->void_refund_amount        = $data['void_refund_amount'] ?? null;
+        $this->was_reprocessed           = $data['was_reprocessed'] ?? null;
     }
 
     /**
@@ -367,6 +368,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * Currency code: USD, EUR, GBP, CAD, AUD, ZAR, JPY
+     *
      * @return mixed
      */
     public function getCurrencyCode()
@@ -384,6 +386,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * If order_status = 0, this value will be the decline reason from the payment gateway.
+     *
      * @return mixed
      */
     public function getDeclineReason()
@@ -393,6 +396,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * Discount applied as a result of subscription management decline salvage settings.
+     *
      * @return mixed
      */
     public function getDeclineSalvageDiscount()
@@ -402,6 +406,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * If using supported membership providers, the value of the password generated
+     *
      * @return mixed
      */
     public function getDigitalDeliveryPassword()
@@ -411,6 +416,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * If using supported membership providers, the value of the username generated
+     *
      * @return mixed
      */
     public function getDigitalDeliveryUsername()
@@ -471,6 +477,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * 1 if it is a gift order, 0 if it is not a gift order
+     *
      * @return mixed
      */
     public function getIsGift()
@@ -496,6 +503,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * This flag indicates whether this is a test credit card or not
+     *
      * @return mixed
      */
     public function getIsTestCc()
@@ -529,6 +537,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * DateTime of Order mm/dd/yyyy hh:mm:ss. Where hours are in military time 00-24
+     *
      * @return mixed
      */
     public function getOrderDateTime()
@@ -554,6 +563,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * 1 For Approvals, 0 For Declines
+     *
      * @return mixed
      */
     public function getOrderStatus()
@@ -579,6 +589,7 @@ class PostBackModel implements \JsonSerializable
 
     /**
      * Payment Method Of Order: VISA, DISCOVER, MASTERCARD, AMERICAN EXPRESS, OFFLINE, CHECK or UNKNOWN
+     *
      * @return mixed
      */
     public function getPaymentMethod()
@@ -862,7 +873,7 @@ class PostBackModel implements \JsonSerializable
         return $this->was_reprocessed;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

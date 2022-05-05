@@ -5,6 +5,6 @@ date_default_timezone_set('UTC');
 error_reporting(E_ALL ^ E_NOTICE);
 
 if (file_exists(__DIR__ . '/.env')) {
-    $dotenv = \Dotenv\Dotenv::create(__DIR__);
+    $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
     $dotenv->load();
 }

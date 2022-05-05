@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM;
 
 class OrderStatus

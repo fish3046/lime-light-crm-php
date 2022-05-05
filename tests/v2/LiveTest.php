@@ -18,7 +18,7 @@ class LiveTest extends TestCase
      */
     protected $service;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -3,3 +3,4 @@ vendor/
 .idea/
 /build/
 tests/.env
+.phpunit.result.cache

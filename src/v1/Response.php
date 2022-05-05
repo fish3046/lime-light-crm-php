@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\v1;
 
 use ArrayAccess;
@@ -6,7 +7,7 @@ use JsonSerializable;
 
 class Response implements ArrayAccess, JsonSerializable
 {
-    protected $data;
+    protected array $data;
 
     public function __construct(array $data)
     {
@@ -26,22 +27,23 @@ class Response implements ArrayAccess, JsonSerializable
         return $respCode == 100 || $respCode == 343;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->data[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return $this->data[$offset];
+        return (string)$this->data[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->data['offset'] = $value;
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->data[$offset]);
     }
@@ -51,7 +53,7 @@ class Response implements ArrayAccess, JsonSerializable
         return $this->data;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->data;
     }

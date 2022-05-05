@@ -1,15 +1,14 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\v1;
 
 abstract class AbstractService
 {
-    /**
-     * @var LimeLightCRM
-     */
-    protected $apiClient;
+    protected LimeLightCRM $apiClient;
 
     /**
      * Api Client constructor.
+     *
      * @param LimeLightCRM $apiClient
      */
     public function __construct(LimeLightCRM $apiClient)

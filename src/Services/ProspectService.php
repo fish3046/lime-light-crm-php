@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Services;
 
 use KevinEm\LimeLightCRM\v1\LimeLightCRM;
@@ -10,14 +11,8 @@ use KevinEm\LimeLightCRM\v1\LimeLightCRM;
  */
 class ProspectService
 {
-    /**
-     * @var LimeLightCRM
-     */
-    protected $v1Engine;
-    /**
-     * @var \KevinEm\LimeLightCRM\v2\LimeLightCRM
-     */
-    protected $v2Engine;
+    protected LimeLightCRM $v1Engine;
+    protected \KevinEm\LimeLightCRM\v2\LimeLightCRM $v2Engine;
 
     public function __construct(LimeLightCRM $v1Engine, \KevinEm\LimeLightCRM\v2\LimeLightCRM $v2Engine)
     {

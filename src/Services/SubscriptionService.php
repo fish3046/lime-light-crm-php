@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Services;
 
 use KevinEm\LimeLightCRM\v1\LimeLightCRM;
@@ -10,10 +11,7 @@ use KevinEm\LimeLightCRM\v1\LimeLightCRM;
  */
 class SubscriptionService
 {
-    /**
-     * @var LimeLightCRM
-     */
-    protected $v1Engine;
+    protected LimeLightCRM $v1Engine;
 
     public function __construct(LimeLightCRM $v1Engine)
     {
@@ -87,7 +85,7 @@ class SubscriptionService
      * @see https://developer-prod.limelightcrm.com/#1481d7e3-c9d6-4f30-b73f-48cc39d00a05
      * @param int    $orderId
      * @param int    $productId
-     * @param string $date      MM/DD/YYYY format
+     * @param string $date MM/DD/YYYY format
      */
     public function changeRecurringDate(int $orderId, int $productId, string $date)
     {

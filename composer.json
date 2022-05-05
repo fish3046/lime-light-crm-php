@@ -1,16 +1,16 @@
 {
   "name": "fish3046/lime-light-crm-php",
-  "description": "Sticky.io CRM v1 PHP Client",
+  "description": "Sticky.io CRM v1 & v2 PHP Client",
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.4.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.2|^7.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7",
+    "phpunit/phpunit": "^9",
     "mockery/mockery": "^1.2",
-    "fzaninotto/faker": "^1.6",
-    "vlucas/phpdotenv": "^3.3"
+    "fakerphp/faker": "^1.6",
+    "vlucas/phpdotenv": "^5.0"
   },
   "license": "MIT",
   "authors": [
