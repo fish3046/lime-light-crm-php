@@ -35,7 +35,7 @@ class Response implements ArrayAccess, JsonSerializable
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return (string)$this->data[$offset];
+        return $this->data[$offset];
     }
 
     public function offsetSet($offset, $value): void
