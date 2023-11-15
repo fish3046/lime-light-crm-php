@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\v1;
 
 use GuzzleHttp\ClientInterface;
@@ -16,7 +15,6 @@ use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
  */
 class LimeLightCRM
 {
-
     /**
      * @var ClientInterface
      */
@@ -167,14 +165,8 @@ class LimeLightCRM
         return new Response($array);
     }
 
-    /**
-     * @param Response $response
-     * @throws LimeLightCRMGenericException
-     */
-    public function checkResponse(Response $response)
+    public function checkResponse(Response $response): void
     {
-        $exception = null;
-
         if (!$response->isSuccess()) {
             $message = '';
             if (isset($response['error_message']) && is_string($response['error_message'])) {
@@ -183,7 +175,7 @@ class LimeLightCRM
                 $message = $response['response_message'];
             }
 
-            throw new LimeLightCRMGenericException($message, $response['response_code'], null, $response->toArray());
+            throw new LimeLightCRMGenericException($message, (int)$response['response_code'], null, $response->toArray());
         }
     }
 

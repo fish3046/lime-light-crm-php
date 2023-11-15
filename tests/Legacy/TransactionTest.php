@@ -1,6 +1,5 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Tests\Legacy;
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
@@ -11,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class TransactionTest extends TestCase
 {
-
     /**
      * @var m\MockInterface
      */
@@ -32,7 +30,7 @@ class TransactionTest extends TestCase
 
         $this->limeLightCRM = m::mock(LimeLightCRM::class);
         $this->limeLightCRM->shouldReceive('getBaseUrl')->andReturn('mock_url');
-        $this->limeLightCRM->shouldReceive('getResponse')->andReturn([]);
+        $this->limeLightCRM->shouldReceive('getResponse')->andReturn('');
         $this->limeLightCRM->shouldReceive('parseResponse')->andReturn([]);
         $this->transaction = new Transaction($this->limeLightCRM);
     }

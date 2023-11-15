@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Tests\v1;
 
 use GuzzleHttp\Client;
@@ -56,7 +57,7 @@ class LiveTest extends TestCase
                 'ipAddress'  => '1.2.3.5',
                 'guid'       => 'abc123'
             ]);
-        
+
         echo json_encode($resp);
         var_dump($resp);
     }
@@ -68,7 +69,7 @@ class LiveTest extends TestCase
             ->prospectUpdate([
                 'prospect_id' => [
                     '3' => [
-                        'custom_fields' => ['id'=>1,'value'=>'again']
+                        'custom_fields' => ['id' => 1,'value' => 'again']
                     ]
                 ]
             ]);
@@ -161,7 +162,7 @@ class LiveTest extends TestCase
         try {
             $resp = $this->service
                 ->orders()
-                ->orderRefund(1038692, 20);
+                ->orderRefund(1619628, "1.50");
         } catch (LimeLightCRMGenericException $ex) {
             var_dump($ex->getMessage());
             var_dump($ex->getResponse());
@@ -204,9 +205,9 @@ class LiveTest extends TestCase
             $resp = $this->service
                 ->orders()
                 ->subscriptionOrderUpdate([
-                    'order_id'           => '10006',
-                    'product_id'         => '1',
-                    'new_recurring_date' => '06/30/2019',
+                    'order_id'           => '1378768',
+                    'product_id'         => '2',
+                    'new_recurring_date' => '05/07/2022',
                 ]);
         } catch (LimeLightCRMGenericException $ex) {
             echo "EXCEPTION\n";
@@ -222,7 +223,7 @@ class LiveTest extends TestCase
         try {
             $resp = $this->service
                 ->orders()
-                ->orderView([209492]);
+                ->orderView([1378741]);
         } catch (LimeLightCRMGenericException $ex) {
             echo "EXCEPTION\n";
             $resp = $ex->getResponse();

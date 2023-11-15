@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\v1;
-
 
 /**
  * Class Prospects
@@ -20,7 +18,7 @@ class Prospects extends AbstractService
         return $this->makeRequest('prospect_find', $data);
     }
 
-     public function prospectUpdate(array $data)
+    public function prospectUpdate(array $data)
     {
         return $this->makeRequest('prospect_update', $data);
     }
@@ -29,5 +27,4 @@ class Prospects extends AbstractService
     {
         return $this->makeRequest('prospect_view', ['prospect_id' => $prospectId]);
     }
-
 }

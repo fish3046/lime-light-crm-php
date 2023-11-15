@@ -1,9 +1,10 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Exceptions;
 
 class LimeLightCRMGenericException extends LimeLightCRMException
 {
-    function getExceptionMessage($code)
+    public function getExceptionMessage(int $code): string
     {
         return $this->message;
     }

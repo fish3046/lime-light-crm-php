@@ -1,150 +1,82 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Exceptions;
-
 
 class LimeLightCRMTransactionException extends LimeLightCRMException
 {
-
-    public function __construct($code, \Exception $previous = null, array $response = [])
+    public function __construct(int $code, \Exception $previous = null, array $response = [])
     {
         parent::__construct($this->getExceptionMessage($code), $code, $previous, $response);
     }
 
-    public function getExceptionMessage($code)
+    public function getExceptionMessage(int $code): string
     {
         // @codeCoverageIgnoreStart
-        switch ($code) {
-            case 101:
-                return '';
-            case 200:
-                return 'Invalid login credentials';
-            case 201:
-                return 'three_d_redirect_url is required';
-            case 303:
-                return 'Invalid upsell product Id of (XXX) found';
-            case 304:
-                return 'Invalid first name of (XXX) found';
-            case 305:
-                return 'Invalid last name of (XXX) found';
-            case 306:
-                return 'Invalid shipping address1 of (XXX) found';
-            case 307:
-                return 'Invalid shipping city of (XXX) found';
-            case 308:
-                return 'Invalid shipping state of (XXX) found';
-            case 309:
-                return 'Invalid shipping zip of (XXX) found';
-            case 310:
-                return 'Invalid shipping country of (XXX) found';
-            case 311:
-                return 'Invalid billing address1 of (XXX) found';
-            case 312:
-                return 'Invalid billing city of (XXX) found';
-            case 313:
-                return 'Invalid billing state of (XXX) found';
-            case 314:
-                return 'Invalid billing zip of (XXX) found';
-            case 315:
-                return 'Invalid billing country of (XXX) found';
-            case 316:
-                return 'Invalid phone number of (XXX) found';
-            case 317:
-                return 'Invalid email address of (XXX) found';
-            case 318:
-                return 'Invalid credit card type of (XXX) found';
-            case 319:
-                return 'Invalid credit card number of (XXX) found';
-            case 320:
-                return 'Invalid expiration date of (XXX) found';
-            case 321:
-                return 'Invalid IP address of (XXX) found';
-            case 322:
-                return 'Invalid shipping id of (XXX) found';
-            case 323:
-                return 'CVV is required for tranType \'Sale\' ';
-            case 324:
-                return 'Supplied CVV of (XXX) has an invalid length';
-            case 325:
-                return 'Shipping state must be 2 characters for a shipping country of US';
-            case 326:
-                return 'Billing state must be 2 characters for a billing country of US';
-            case 327:
-                return 'Invalid payment type of XXX';
-            case 328:
-                return 'Expiration month of (XXX) must be between 01 and 12';
-            case 329:
-                return 'Expiration date of (XXX) must be 4 digits long';
-            case 330:
-                return 'Could not find prospect record';
-            case 331:
-                return 'Missing previous OrderId';
-            case 332:
-                return 'Could not find original order Id';
-            case 333:
-                return 'Order has been black listed';
-            case 334:
-                return 'The credit card number or email address has already purchased this product(s)';
-            case 335:
-                return 'Invalid Dynamic Price Format';
-            case 336:
-                return 'checkRoutingNumber must be passed when checking is the payment type is checking or eft_germany';
-            case 337:
-                return 'checkAccountNumber must be passed when checking is the payment type is checking or eft_germany';
-            case 338:
-                return 'Invalid campaign to perform sale on.  No checking account on this campaign.';
-            case 339:
-                return 'tranType missing or invalid';
-            case 340:
-                return 'Invalid employee username of (XXX) found';
-            case 341:
-                return 'Campaign Id (XXX) restricted to user (XXX)';
-            case 342:
-                return 'The credit card has expired';
-            case 400:
-                return 'Invalid campaign Id of (XXX) found';
-            case 411:
-                return 'Invalid subscription field';
-            case 412:
-                return 'Missing subscription field';
-            case 413:
-                return 'Product is not subscription based';
-            case 414:
-                return 'The product that is being purchased has a different subscription type than the next recurring product';
-            case 415:
-                return 'Invalid subscription value';
-            case 600:
-                return 'Invalid product Id of (XXX) found';
-            case 666:
-                return 'User does not have permission to use this method';
-            case 667:
-                return 'This user account is currently disabled';
-            case 668:
-                return 'Unauthorized IP Address';
-            case 669:
-                return 'Unauthorized to access campaign';
-            case 700:
-                return 'Invalid method supplied';
-            case 705:
-                return 'Order is not 3DS related';
-            case 800:
-                return 'Transaction was declined';
-            case 900:
-                return 'SSL is required to run a transaction';
-            case 901:
-                return 'Alternative payment payer id is required for this payment type';
-            case 902:
-                return 'Alternative payment token is required for this payment type';
-            case 1000:
-                return 'Could not add record';
-            case 1001:
-                return 'Invalid login credentials supplied';
-            case 1002:
-                return 'Invalid method supplied';
-            default:
-                return 'Unknown exception';
-        }
+        return match ($code) {
+            101 => '',
+            200 => 'Invalid login credentials',
+            201 => 'three_d_redirect_url is required',
+            303 => 'Invalid upsell product Id of (XXX) found',
+            304 => 'Invalid first name of (XXX) found',
+            305 => 'Invalid last name of (XXX) found',
+            306 => 'Invalid shipping address1 of (XXX) found',
+            307 => 'Invalid shipping city of (XXX) found',
+            308 => 'Invalid shipping state of (XXX) found',
+            309 => 'Invalid shipping zip of (XXX) found',
+            310 => 'Invalid shipping country of (XXX) found',
+            311 => 'Invalid billing address1 of (XXX) found',
+            312 => 'Invalid billing city of (XXX) found',
+            313 => 'Invalid billing state of (XXX) found',
+            314 => 'Invalid billing zip of (XXX) found',
+            315 => 'Invalid billing country of (XXX) found',
+            316 => 'Invalid phone number of (XXX) found',
+            317 => 'Invalid email address of (XXX) found',
+            318 => 'Invalid credit card type of (XXX) found',
+            319 => 'Invalid credit card number of (XXX) found',
+            320 => 'Invalid expiration date of (XXX) found',
+            321 => 'Invalid IP address of (XXX) found',
+            322 => 'Invalid shipping id of (XXX) found',
+            323 => 'CVV is required for tranType \'Sale\' ',
+            324 => 'Supplied CVV of (XXX) has an invalid length',
+            325 => 'Shipping state must be 2 characters for a shipping country of US',
+            326 => 'Billing state must be 2 characters for a billing country of US',
+            327 => 'Invalid payment type of XXX',
+            328 => 'Expiration month of (XXX) must be between 01 and 12',
+            329 => 'Expiration date of (XXX) must be 4 digits long',
+            330 => 'Could not find prospect record',
+            331 => 'Missing previous OrderId',
+            332 => 'Could not find original order Id',
+            333 => 'Order has been black listed',
+            334 => 'The credit card number or email address has already purchased this product(s)',
+            335 => 'Invalid Dynamic Price Format',
+            336 => 'checkRoutingNumber must be passed when checking is the payment type is checking or eft_germany',
+            337 => 'checkAccountNumber must be passed when checking is the payment type is checking or eft_germany',
+            338 => 'Invalid campaign to perform sale on.  No checking account on this campaign.',
+            339 => 'tranType missing or invalid',
+            340 => 'Invalid employee username of (XXX) found',
+            341 => 'Campaign Id (XXX) restricted to user (XXX)',
+            342 => 'The credit card has expired',
+            400 => 'Invalid campaign Id of (XXX) found',
+            411 => 'Invalid subscription field',
+            412 => 'Missing subscription field',
+            413 => 'Product is not subscription based',
+            414 => 'The product that is being purchased has a different subscription type than the next recurring product',
+            415 => 'Invalid subscription value',
+            600 => 'Invalid product Id of (XXX) found',
+            666 => 'User does not have permission to use this method',
+            667 => 'This user account is currently disabled',
+            668 => 'Unauthorized IP Address',
+            669 => 'Unauthorized to access campaign',
+            700, 1002 => 'Invalid method supplied',
+            705 => 'Order is not 3DS related',
+            800 => 'Transaction was declined',
+            900 => 'SSL is required to run a transaction',
+            901 => 'Alternative payment payer id is required for this payment type',
+            902 => 'Alternative payment token is required for this payment type',
+            1000 => 'Could not add record',
+            1001 => 'Invalid login credentials supplied',
+            default => 'Unknown exception',
+        };
         // @codeCoverageIgnoreEnd
     }
 }

@@ -1,36 +1,21 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Legacy;
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMTransactionException;
 
-
 /**
  * Class Transaction
+ *
  * @package KevinEm\LimeLightCRM\Legacy
  */
 class Transaction
 {
-
-    /**
-     * @var LimeLightCRM
-     */
-    protected $limeLightCRM;
-
-    /**
-     * Transaction constructor.
-     * @param LimeLightCRM $limeLightCRM
-     */
-    public function __construct(LimeLightCRM $limeLightCRM)
+    public function __construct(protected LimeLightCRM $limeLightCRM)
     {
-        $this->limeLightCRM = $limeLightCRM;
     }
 
-    /**
-     * @return string
-     */
-    public function getTransactionUrl()
+    public function getTransactionUrl(): string
     {
         return $this->limeLightCRM->getBaseUrl() . '/admin/transact.php';
     }
@@ -41,7 +26,7 @@ class Transaction
      * @param array $response
      * @throws LimeLightCRMTransactionException
      */
-    public function checkResponse(array $response)
+    public function checkResponse(array $response): void
     {
         $exception = $responses = null;
 
@@ -56,7 +41,7 @@ class Transaction
         if (isset($responses)) {
             foreach ($responses as $code) {
                 if (!in_array($code, [100])) {
-                    $exception = new LimeLightCRMTransactionException($code, $exception, $response);
+                    $exception = new LimeLightCRMTransactionException((int)$code, $exception, $response);
                 }
             }
         }
@@ -66,11 +51,7 @@ class Transaction
         }
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function newOrder(array $data)
+    public function newOrder(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('NewOrder', $data);
 
@@ -83,11 +64,7 @@ class Transaction
         return $parsed;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function newOrderCardOnFile(array $data)
+    public function newOrderCardOnFile(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('NewOrderCardOnFile', $data);
 
@@ -100,11 +77,7 @@ class Transaction
         return $parsed;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function newOrderWithProspect(array $data)
+    public function newOrderWithProspect(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('NewOrderWithProspect', $data);
 
@@ -117,11 +90,7 @@ class Transaction
         return $parsed;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function authorizePayment(array $data)
+    public function authorizePayment(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('authorize_payment', $data);
 
@@ -134,11 +103,7 @@ class Transaction
         return $parsed;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function newProspect(array $data)
+    public function newProspect(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('NewProspect', $data);
 
@@ -151,11 +116,7 @@ class Transaction
         return $parsed;
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function threeDRedirect(array $data)
+    public function threeDRedirect(array $data): array
     {
         $formParams = $this->limeLightCRM->buildFormParams('three_d_redirect', $data);
 

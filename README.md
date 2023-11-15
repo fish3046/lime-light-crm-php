@@ -1,6 +1,6 @@
-# Lime Light CRM API Client for PHP
+# Sticky.io API Client for PHP
 
-A fork of Kevin Em's limelight SDK, this one includes both v1 and v2 API's
+A fork of Kevin Em's Sticky.io SDK, this one includes both v1 and v2 API's
 as well as the legacy version. 
 
 https://www.limelightcrm.com/
@@ -15,24 +15,24 @@ composer require git@bitbucket.org:fish3046/lime-light-crm-php
 
 ## Documentation
 
-**Legacy**: https://developer-legacy-prod.limelightcrm.com/
+**Legacy**: https://developer-legacy-prod.sticky.io/
 
-**v1**:  https://developer-prod.limelightcrm.com/
+**v1**:  https://developer-prod.sticky.io/
 
-**v2**: https://developer-v2.limelightcrm.com/
+**v2, v3**: https://developer-v2.sticky.io/
 
 ### Example v1 Usage
 
 ```php
 $gClient = new Client();
 
-$limelightCRM = new LimeLightCRM([
+$sticky = new LimeLightCRM([
     'base_url' => 'your_url',
     'username' => 'your_username',
     'password' => 'your_password'
 ], $gClient);
 
-$limelightCRM->prospects()->newProspect([
+$sticky->prospects()->newProspect([
     'campaignId' => 1,
     'firstName'  => 'John',
     'lastName' => 'Doe',

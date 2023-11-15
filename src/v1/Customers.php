@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\v1;
-
 
 /**
  * Class Customers

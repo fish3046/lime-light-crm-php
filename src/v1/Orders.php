@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\v1;
-
 
 use KevinEm\LimeLightCRM\v1\DTO\AuthorizePayment;
 
@@ -153,5 +151,4 @@ class Orders extends AbstractService
     {
         return $this->makeRequest('three_d_redirect', $data);
     }
-
 }

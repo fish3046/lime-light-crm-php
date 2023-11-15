@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\v1\DTO;
 
 class AuthorizePayment extends AbstractDTO

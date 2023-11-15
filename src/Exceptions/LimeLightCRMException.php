@@ -1,16 +1,10 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Exceptions;
-
 
 abstract class LimeLightCRMException extends \Exception
 {
-
-    /**
-     * @var array
-     */
-    private $response;
+    private array $response;
 
     /**
      * LimeLightCRMException constructor.
@@ -25,12 +19,9 @@ abstract class LimeLightCRMException extends \Exception
         $this->response = $response;
     }
 
-    abstract function getExceptionMessage($code);
+    abstract public function getExceptionMessage(int $code): string;
 
-    /**
-     * @return array
-     */
-    public function getResponse()
+    public function getResponse(): array
     {
         return $this->response;
     }

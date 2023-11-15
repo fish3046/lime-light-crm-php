@@ -4,9 +4,9 @@ namespace KevinEm\LimeLightCRM;
 
 class OrderStatus
 {
-    const APPROVED = 2;
-    const VOID_REFUNDED = 6;
-    const DECLINED = 7;
-    const SHIPPED = 8;
-    const PENDING = 11;
+    public const APPROVED = 2;
+    public const VOID_REFUNDED = 6;
+    public const DECLINED = 7;
+    public const SHIPPED = 8;
+    public const PENDING = 11;
 }

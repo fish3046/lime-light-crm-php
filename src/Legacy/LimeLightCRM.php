@@ -1,55 +1,25 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Legacy;
 
 use GuzzleHttp\ClientInterface;
 
 /**
  * This is for use with the old legacy API.
- * Documentation found here: https://developer-legacy-prod.limelightcrm.com/
+ * Documentation found here: https://developer-legacy-prod.sticky.io/
  *
  * @package KevinEm\LimeLightCRM\Legacy
  */
 class LimeLightCRM
 {
+    protected ClientInterface $httpClient;
+    protected string $baseUrl = '';
+    protected string $username = '';
+    protected string $password = '';
 
-    /**
-     * @var ClientInterface
-     */
-    protected $httpClient;
+    protected Membership $membership;
+    protected Transaction $transaction;
 
-    /**
-     * @var string
-     */
-    protected $baseUrl;
-
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * @var Membership
-     */
-    protected $membership;
-
-    /**
-     * @var Transaction
-     */
-    protected $transaction;
-
-    /**
-     * LimeLightCRM constructor.
-     *
-     * @param ClientInterface $client
-     * @param array           $options
-     */
     public function __construct(ClientInterface $client, array $options)
     {
         // Prep authentication options
@@ -64,18 +34,11 @@ class LimeLightCRM
         $this->transaction = new Transaction($this);
     }
 
-    /**
-     * @return ClientInterface
-     */
     public function getHttpClient(): ClientInterface
     {
         return $this->httpClient;
     }
 
-    /**
-     * @param ClientInterface $httpClient
-     * @return $this
-     */
     public function setHttpClient(ClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;
@@ -83,21 +46,12 @@ class LimeLightCRM
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBaseUrl()
+    public function getBaseUrl(): string
     {
         return $this->baseUrl;
     }
 
-    /**
-     * @param $method
-     * @param $uri
-     * @param array $options
-     * @return mixed
-     */
-    public function getResponse($method, $uri, array $options = [])
+    public function getResponse(string $method, $uri, array $options = []): string
     {
         $res = $this->getHttpClient()->request($method, $uri, $options);
 
@@ -109,17 +63,14 @@ class LimeLightCRM
      * @param array $data
      * @return array
      */
-    public function buildFormParams($method, array $data = [])
+    public function buildFormParams($method, array $data = []): array
     {
         return [
             'form_params' => array_merge_recursive($this->getDefaultFormParams(), compact('method'), $data)
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getDefaultFormParams()
+    public function getDefaultFormParams(): array
     {
         return [
             'username' => $this->username,
@@ -133,7 +84,7 @@ class LimeLightCRM
      * @param $response
      * @return array
      */
-    public function parseResponse($response)
+    public function parseResponse($response): array
     {
         $array = [];
 
@@ -152,18 +103,12 @@ class LimeLightCRM
         return $array;
     }
 
-    /**
-     * @return Membership
-     */
-    public function membership()
+    public function membership(): Membership
     {
         return $this->membership;
     }
 
-    /**
-     * @return Transaction
-     */
-    public function transaction()
+    public function transaction(): Transaction
     {
         return $this->transaction;
     }

@@ -1,266 +1,139 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Exceptions;
-
 
 class LimeLightCRMMembershipException extends LimeLightCRMException
 {
-
-    public function __construct($code, \Exception $previous = null, array $response = [])
+    public function __construct(int $code, \Exception $previous = null, array $response = [])
     {
         parent::__construct($this->getExceptionMessage($code), $code, $previous, $response);
     }
 
-    public function getExceptionMessage($code)
+    public function getExceptionMessage(int $code): string
     {
         // @codeCoverageIgnoreStart
-        switch ($code) {
-            case 200:
-                return 'Invalid login credentials';
-            case 300:
-                return 'Update failed due to third party rejection';
-            case 301:
-                return 'Error updating affiliate data';
-            case 320:
-                return 'Invalid Product Id';
-            case 321:
-                return 'Existing Product Category Id Not Found';
-            case 322:
-                return 'Invalid Category Id';
-            case 323:
-                return 'Digital Delivery and Digital URL must be paired together and digital URL must be a valid URL';
-            case 324:
-                return 'Invalid rebill_product or rebill_days value';
-            case 325:
-                return 'Length Does Not Meet Minimum';
-            case 326:
-                return 'URL is invalid';
-            case 327:
-                return 'Payment Type Invalid';
-            case 328:
-                return 'Expiration Date Invalid (Must be in the format of MMYY with no special characters)';
-            case 329:
-                return 'Credit card must be either 15 or 16 digits numeric only';
-            case 330:
-                return 'No Status Passed';
-            case 331:
-                return 'Invalid Criteria';
-            case 332:
-                return 'Start and end date are required';
-            case 333:
-                return 'No Orders Found';
-            case 334:
-                return 'Invalid Start Date format';
-            case 335:
-                return 'Invalid End Date format';
-            case 336:
-                return 'Wild Card Unsupported for this search criteria';
-            case 337:
-                return 'Last 4 or First 4 must be 4 characters exactly';
-            case 338:
-                return 'Timestamp invalid';
-            case 339:
-                return 'Total Amount must be numeric and non-negative';
-            case 340:
-                return 'Invalid country code';
-            case 341:
-                return 'Invalid state code';
-            case 342:
-                return 'Invalid Email Address';
-            case 343:
-                return 'Data Element Has Same Value As Value Passed No Update done (Information ONLY, but still a success)';
-            case 344:
-                return 'Invalid Number Format';
-            case 345:
-                return 'Must be a 1 or 0.  "1" being "On" or true. "0" being "Off" or false.';
-            case 346:
-                return 'Invalid date format. Use mm/dd/yyyy';
-            case 347:
-                return 'Invalid RMA reason';
-            case 348:
-                return 'Order is already flagged as RMA';
-            case 349:
-                return 'Order is not flagged as RMA';
-            case 350:
-                return 'Invalid order Id supplied';
-            case 351:
-                return 'Invalid status or action supplied';
-            case 352:
-                return 'Uneven Order/Status/Action Pairing';
-            case 353:
-                return 'Cannot stop recurring';
-            case 354:
-                return 'Cannot reset recurring';
-            case 355:
-                return 'Cannot start recurring';
-            case 356:
-                return 'Credit card has expired';
-            case 357:
-                return 'Exceeded number of batch orders to view';
-            case 360:
-                return 'Cannot stop upsell recurring';
-            case 370:
-                return 'Invalid amount supplied';
-            case 371:
-                return 'Invalid keep recurring flag supplied';
-            case 372:
-                return 'Refund amount exceeds current order total';
-            case 373:
-                return 'Cannot void a fully refunded order';
-            case 374:
-                return 'Cannot reprocess non-declined orders';
-            case 375:
-                return 'Cannot blacklist test payment method';
-            case 376:
-                return 'Invalid tracking number';
-            case 377:
-                return 'Cannot ship pending orders';
-            case 378:
-                return 'Order already shipped';
-            case 379:
-                return 'Order is fully refunded/voided';
-            case 380:
-                return 'Order is not valid for force bill';
-            case 381:
-                return 'Customer is blacklisted';
-            case 382:
-                return 'Invalid US state';
-            case 383:
-                return 'All military states must have a city of either "APO", "FPO". or "DPO"';
-            case 384:
-                return 'Invalid date mode';
-            case 385:
-                return 'Invalid billing cycle filter';
-            case 386:
-                return 'Order has already been returned';
-            case 387:
-                return 'Invalid return reason';
-            case 388:
-                return 'Rebill discount exceeds maximum for product';
-            case 399:
-                return 'Refund amount must be greater than 0';
-            case 390:
-                return 'Invalid number of days supplied';
-            case 400:
-                return 'Invalid campaign Id supplied';
-            case 401:
-                return 'Invalid subscription type';
-            case 402:
-                return 'Subscription type 3 requires subscription week and subscription day values';
-            case 403:
-                return 'Invalid subscription week value';
-            case 404:
-                return 'Invalid subscription day value';
-            case 405:
-                return 'Subscription type 3 required for subscription week and subscription day values';
-            case 406:
-                return 'Rebill days must be a value between 1 and 31 for subscription type 2';
-            case 407:
-                return 'Rebill days must be greater than 0 if subscription type is 1 or 2';
-            case 408:
-                return 'Rebill days is invalid unless type is 1 or 2';
-            case 409:
-                return 'Subscription type 0, other subscription fields invalid';
-            case 410:
-                return 'API user: (api_username) has reached the limit of requests per minute: (limit) for method: (method_name)';
-            case 411:
-                return 'Invalid subscription field';
-            case 412:
-                return 'Missing subscription field';
-            case 413:
-                return 'Product is not subscription based';
-            case 415:
-                return 'Invalid subscription value';
-            case 420:
-                return 'Campaign does not have fulfillment provider attached';
-            case 421:
-                return 'This order was placed on hold';
-            case 422:
-                return 'This order has not been sent to fulfillment yet';
-            case 423:
-                return 'Invalid SKU';
-            case 424:
-                return 'Fulfillment Error, provider did not specify';
-            case 425:
-                return 'This order has been sent to fulfillment but has not been shipped';
-            case 426:
-                return 'This order not eligible for offline payment  approval (incorrect status & payment type)';
-            case 430:
-                return 'Coupon Error: Invalid Promo Code';
-            case 431:
-                return 'Coupon Error: This promo code has expired';
-            case 432:
-                return 'Coupon Error: Product does not meet minimum purchase amount';
-            case 433:
-                return 'Coupon Error: Maximum use count has exceeded';
-            case 434:
-                return 'Coupon Error: Customer use count has exceeded its limit';
-            case 435:
-                return 'Invalid attribute found on product';
-            case 436:
-                return 'Invalid option found on attribute';
-            case 437:
-                return 'Invalid attribute combination; no variants matched for product';
-            case 438:
-                return 'Invalid attribute(s). Product does not have variants';
-            case 439:
-                return 'Product has variants; product attributes must be provided.';
-            case 500:
-                return 'Invalid customer Id supplied';
-            case 600:
-                return 'Invalid product Id supplied';
-            case 601:
-                return 'Invalid prospect Id supplied';
-            case 602:
-                return 'No prospects found';
-            case 603:
-                return 'Invalid customer Id supplied';
-            case 604:
-                return 'No customers found';
-            case 666:
-                return 'User does not have permission to use this method';
-            case 667:
-                return 'This user account is currently disabled';
-            case 668:
-                return 'Unauthorized IP Address';
-            case 669:
-                return 'Unauthorized to access campaign';
-            case 700:
-                return 'Invalid method supplied';
-            case 701:
-                return 'Action not permitted by gateway';
-            case 702:
-                return 'Invalid gateway Id';
-            case 800:
-                return 'Transaction was declined';
-            case 901:
-                return 'Invalid return URL';
-            case 902:
-                return 'Invalid cancel URL';
-            case 903:
-                return 'Error retrieving alternative provider data';
-            case 904:
-                return 'Campaign does not support an alternative payment provider';
-            case 905:
-                return 'Product quantity/dynamic price does not match';
-            case 906:
-                return 'Invalid quantity';
-            case 907:
-                return 'Invalid shipping Id';
-            case 908:
-                return 'Payment was already approved';
-            case 909:
-                return 'No active shipping methods found';
-            case 1000:
-                return 'SSL is required';
-            case 1001:
-                return 'Invalid login credentials supplied';
-            case 1002:
-                return 'Invalid method supplied';
-            default:
-                return 'Unknown exception';
-        }
+        return match ($code) {
+            200 => 'Invalid login credentials',
+            300 => 'Update failed due to third party rejection',
+            301 => 'Error updating affiliate data',
+            320 => 'Invalid Product Id',
+            321 => 'Existing Product Category Id Not Found',
+            322 => 'Invalid Category Id',
+            323 => 'Digital Delivery and Digital URL must be paired together and digital URL must be a valid URL',
+            324 => 'Invalid rebill_product or rebill_days value',
+            325 => 'Length Does Not Meet Minimum',
+            326 => 'URL is invalid',
+            327 => 'Payment Type Invalid',
+            328 => 'Expiration Date Invalid (Must be in the format of MMYY with no special characters)',
+            329 => 'Credit card must be either 15 or 16 digits numeric only',
+            330 => 'No Status Passed',
+            331 => 'Invalid Criteria',
+            332 => 'Start and end date are required',
+            333 => 'No Orders Found',
+            334 => 'Invalid Start Date format',
+            335 => 'Invalid End Date format',
+            336 => 'Wild Card Unsupported for this search criteria',
+            337 => 'Last 4 or First 4 must be 4 characters exactly',
+            338 => 'Timestamp invalid',
+            339 => 'Total Amount must be numeric and non-negative',
+            340 => 'Invalid country code',
+            341 => 'Invalid state code',
+            342 => 'Invalid Email Address',
+            343 => 'Data Element Has Same Value As Value Passed No Update done (Information ONLY, but still a success)',
+            344 => 'Invalid Number Format',
+            345 => 'Must be a 1 or 0.  "1" being "On" or true. "0" being "Off" or false.',
+            346 => 'Invalid date format. Use mm/dd/yyyy',
+            347 => 'Invalid RMA reason',
+            348 => 'Order is already flagged as RMA',
+            349 => 'Order is not flagged as RMA',
+            350 => 'Invalid order Id supplied',
+            351 => 'Invalid status or action supplied',
+            352 => 'Uneven Order/Status/Action Pairing',
+            353 => 'Cannot stop recurring',
+            354 => 'Cannot reset recurring',
+            355 => 'Cannot start recurring',
+            356 => 'Credit card has expired',
+            357 => 'Exceeded number of batch orders to view',
+            360 => 'Cannot stop upsell recurring',
+            370 => 'Invalid amount supplied',
+            371 => 'Invalid keep recurring flag supplied',
+            372 => 'Refund amount exceeds current order total',
+            373 => 'Cannot void a fully refunded order',
+            374 => 'Cannot reprocess non-declined orders',
+            375 => 'Cannot blacklist test payment method',
+            376 => 'Invalid tracking number',
+            377 => 'Cannot ship pending orders',
+            378 => 'Order already shipped',
+            379 => 'Order is fully refunded/voided',
+            380 => 'Order is not valid for force bill',
+            381 => 'Customer is blacklisted',
+            382 => 'Invalid US state',
+            383 => 'All military states must have a city of either "APO", "FPO". or "DPO"',
+            384 => 'Invalid date mode',
+            385 => 'Invalid billing cycle filter',
+            386 => 'Order has already been returned',
+            387 => 'Invalid return reason',
+            388 => 'Rebill discount exceeds maximum for product',
+            399 => 'Refund amount must be greater than 0',
+            390 => 'Invalid number of days supplied',
+            400 => 'Invalid campaign Id supplied',
+            401 => 'Invalid subscription type',
+            402 => 'Subscription type 3 requires subscription week and subscription day values',
+            403 => 'Invalid subscription week value',
+            404 => 'Invalid subscription day value',
+            405 => 'Subscription type 3 required for subscription week and subscription day values',
+            406 => 'Rebill days must be a value between 1 and 31 for subscription type 2',
+            407 => 'Rebill days must be greater than 0 if subscription type is 1 or 2',
+            408 => 'Rebill days is invalid unless type is 1 or 2',
+            409 => 'Subscription type 0, other subscription fields invalid',
+            410 => 'API user: (api_username) has reached the limit of requests per minute: (limit) for method: (method_name)',
+            411 => 'Invalid subscription field',
+            412 => 'Missing subscription field',
+            413 => 'Product is not subscription based',
+            415 => 'Invalid subscription value',
+            420 => 'Campaign does not have fulfillment provider attached',
+            421 => 'This order was placed on hold',
+            422 => 'This order has not been sent to fulfillment yet',
+            423 => 'Invalid SKU',
+            424 => 'Fulfillment Error, provider did not specify',
+            425 => 'This order has been sent to fulfillment but has not been shipped',
+            426 => 'This order not eligible for offline payment  approval (incorrect status & payment type)',
+            430 => 'Coupon Error: Invalid Promo Code',
+            431 => 'Coupon Error: This promo code has expired',
+            432 => 'Coupon Error: Product does not meet minimum purchase amount',
+            433 => 'Coupon Error: Maximum use count has exceeded',
+            434 => 'Coupon Error: Customer use count has exceeded its limit',
+            435 => 'Invalid attribute found on product',
+            436 => 'Invalid option found on attribute',
+            437 => 'Invalid attribute combination; no variants matched for product',
+            438 => 'Invalid attribute(s). Product does not have variants',
+            439 => 'Product has variants; product attributes must be provided.',
+            500, 603 => 'Invalid customer Id supplied',
+            600 => 'Invalid product Id supplied',
+            601 => 'Invalid prospect Id supplied',
+            602 => 'No prospects found',
+            604 => 'No customers found',
+            666 => 'User does not have permission to use this method',
+            667 => 'This user account is currently disabled',
+            668 => 'Unauthorized IP Address',
+            669 => 'Unauthorized to access campaign',
+            700, 1002 => 'Invalid method supplied',
+            701 => 'Action not permitted by gateway',
+            702 => 'Invalid gateway Id',
+            800 => 'Transaction was declined',
+            901 => 'Invalid return URL',
+            902 => 'Invalid cancel URL',
+            903 => 'Error retrieving alternative provider data',
+            904 => 'Campaign does not support an alternative payment provider',
+            905 => 'Product quantity/dynamic price does not match',
+            906 => 'Invalid quantity',
+            907 => 'Invalid shipping Id',
+            908 => 'Payment was already approved',
+            909 => 'No active shipping methods found',
+            1000 => 'SSL is required',
+            1001 => 'Invalid login credentials supplied',
+            default => 'Unknown exception',
+        };
         // @codeCoverageIgnoreEnd
     }
 }

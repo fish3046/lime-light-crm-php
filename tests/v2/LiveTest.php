@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Tests\v2;
 
 use GuzzleHttp\Client;
@@ -37,7 +38,7 @@ class LiveTest extends TestCase
         $resp = $this->service
             ->prospects()
             ->getProspectCustomFields();
-        
+
         echo json_encode($resp);
         var_dump($resp);
     }

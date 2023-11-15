@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\v1;
-
 
 /**
  * Class Campaigns
@@ -19,5 +17,4 @@ class Campaigns extends AbstractService
     {
         return $this->makeRequest('campaign_view', ['campaign_id' => $campaignId]);
     }
-
 }

@@ -4,16 +4,8 @@ namespace KevinEm\LimeLightCRM\v1;
 
 abstract class AbstractService
 {
-    protected LimeLightCRM $apiClient;
-
-    /**
-     * Api Client constructor.
-     *
-     * @param LimeLightCRM $apiClient
-     */
-    public function __construct(LimeLightCRM $apiClient)
+    public function __construct(protected LimeLightCRM $apiClient)
     {
-        $this->apiClient = $apiClient;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace KevinEm\LimeLightCRM\v2;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMGenericException;
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
@@ -17,28 +18,10 @@ use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMParseResponseException;
 class LimeLightCRM
 {
     protected ClientInterface $httpClient;
+    protected string $baseUrl = '';
+    protected string $username = '';
+    protected string $password = '';
 
-    /**
-     * @var string
-     */
-    protected $baseUrl;
-
-    /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * LimeLightCRM constructor.
-     *
-     * @param ClientInterface $client
-     * @param array  $options
-     */
     public function __construct(ClientInterface $client, array $options)
     {
         $this->baseUrl  = rtrim((string)$options['base_url'], '\\');
@@ -86,9 +69,6 @@ class LimeLightCRM
         return $parsed;
     }
 
-    /**
-     * @return array
-     */
     public function getAuth(): array
     {
         return [
@@ -96,49 +76,35 @@ class LimeLightCRM
         ];
     }
 
-    /**
-     * @param array $data
-     * @return array
-     */
-    public function buildFormParams($data = false): array
+    public function buildFormParams(array $data = []): array
     {
-        return ($data) ? [RequestOptions::FORM_PARAMS => $data] : [];
+        return (count($data)) ? [RequestOptions::FORM_PARAMS => $data] : [];
     }
 
-    /**
-     * @return string
-     */
     public function getBaseUrl(): string
     {
         return $this->baseUrl;
     }
 
     /**
-     * @param       $method
-     * @param       $uri
-     * @param array $options
+     * @param string $method
+     * @param        $uri
+     * @param array  $options
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
-    public function getResponse($method, $uri, array $options = []): string
+    public function getResponse(string $method, $uri, array $options = []): string
     {
         $res = $this->getHttpClient()->request($method, $uri, $options);
 
         return $res->getBody()->getContents();
     }
 
-    /**
-     * @return ClientInterface
-     */
     public function getHttpClient(): ClientInterface
     {
         return $this->httpClient;
     }
 
-    /**
-     * @param ClientInterface $httpClient
-     * @return $this
-     */
     public function setHttpClient(ClientInterface $httpClient): self
     {
         $this->httpClient = $httpClient;

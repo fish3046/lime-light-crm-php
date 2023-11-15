@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Tests\Legacy;
-
 
 use KevinEm\LimeLightCRM\Exceptions\LimeLightCRMMembershipException;
 use KevinEm\LimeLightCRM\Legacy\LimeLightCRM;
@@ -12,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class MembershipTest extends TestCase
 {
-
     /**
      * @var m\MockInterface
      */
@@ -33,7 +30,7 @@ class MembershipTest extends TestCase
 
         $this->limeLightCRM = m::mock(LimeLightCRM::class);
         $this->limeLightCRM->shouldReceive('getBaseUrl')->andReturn('mock_url');
-        $this->limeLightCRM->shouldReceive('getResponse')->andReturn([]);
+        $this->limeLightCRM->shouldReceive('getResponse')->andReturn('');
         $this->limeLightCRM->shouldReceive('parseResponse')->andReturn([]);
         $this->membership = new Membership($this->limeLightCRM);
     }
@@ -67,7 +64,7 @@ class MembershipTest extends TestCase
     {
         $this->limeLightCRM->shouldReceive('buildFormParams')->with('validate_credentials')->andReturn([]);
         $res = $this->membership->validateCredentials();
-        $this->assertEquals($res, []);
+        $this->assertSame($res, '');
     }
 
     public function testViewCampaign()

@@ -1,4 +1,5 @@
 <?php
+
 namespace KevinEm\LimeLightCRM\Exceptions;
 
 /**
@@ -8,7 +9,7 @@ namespace KevinEm\LimeLightCRM\Exceptions;
  */
 class LimeLightCRMParseResponseException extends LimeLightCRMException
 {
-    function getExceptionMessage($code)
+    public function getExceptionMessage(int $code): string
     {
         return $this->message;
     }

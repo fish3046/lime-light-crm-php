@@ -1,8 +1,6 @@
 <?php
 
-
 namespace KevinEm\LimeLightCRM\Tests\Legacy;
-
 
 use GuzzleHttp\Client;
 use KevinEm\LimeLightCRM\Legacy\LimeLightCRM;
@@ -14,7 +12,6 @@ use Psr\Http\Message\StreamInterface;
 
 class LimeLightCRMTest extends TestCase
 {
-
     /**
      * @var LimeLightCRM
      */
@@ -68,8 +65,11 @@ class LimeLightCRMTest extends TestCase
 
         $this->streamMock->shouldReceive('getContents')->once()->andReturn($mock_content);
         $this->responseMock->shouldReceive('getBody')->once()->andReturn($this->streamMock);
-        $this->clientMock->shouldReceive('request')->with('mock_method', 'mock_uri',
-            [])->once()->andReturn($this->responseMock);
+        $this->clientMock->shouldReceive('request')->with(
+            'mock_method',
+            'mock_uri',
+            []
+        )->once()->andReturn($this->responseMock);
         $res = $this->limeLightCRM->getResponse('mock_method', 'mock_uri', []);
         $this->assertEquals($mock_content, $res);
     }

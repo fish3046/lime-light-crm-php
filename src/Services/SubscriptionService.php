@@ -12,11 +12,8 @@ use KevinEm\LimeLightCRM\v1\Response;
  */
 class SubscriptionService
 {
-    protected LimeLightCRM $v1Engine;
-
-    public function __construct(LimeLightCRM $v1Engine)
+    public function __construct(protected LimeLightCRM $v1Engine)
     {
-        $this->v1Engine = $v1Engine;
     }
 
     /**
