@@ -3,7 +3,7 @@
 A fork of Kevin Em's Sticky.io SDK, this one includes both v1 and v2 API's
 as well as the legacy version. 
 
-https://www.limelightcrm.com/
+https://www.sticky.io/
 
 ## Installation
 
