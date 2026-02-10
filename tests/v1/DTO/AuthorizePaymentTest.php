@@ -26,4 +26,23 @@ class AuthorizePaymentTest extends TestCase
 
         $this->assertArrayHasKey('billingState', $arr);
     }
+
+    public function testWalletTokenForApplePay()
+    {
+        $o = new AuthorizePayment();
+        $o->setCreditCardType('applepay');
+        $o->setWalletToken('test_token_value');
+
+        $arr = $o->toArray();
+
+        $this->assertSame('applepay', $arr['creditCardType']);
+        $this->assertSame('test_token_value', $arr['wallet_token']);
+    }
+
+    public function testWalletTokenDefaultsToNull()
+    {
+        $o = new AuthorizePayment();
+
+        $this->assertNull($o->getWalletToken());
+    }
 }
