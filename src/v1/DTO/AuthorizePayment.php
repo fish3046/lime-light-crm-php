@@ -52,6 +52,14 @@ class AuthorizePayment extends AbstractDTO
     protected $void_flag = true;
 
     /**
+     * Digital wallet token for Apple Pay or Google Pay payments.
+     * When using Apple Pay, set creditCardType to 'applepay' and pass the token here.
+     *
+     * @var string|null
+     */
+    protected $wallet_token = null;
+
+    /**
      * @return mixed
      */
     public function getBillingFirstName()
@@ -475,6 +483,28 @@ class AuthorizePayment extends AbstractDTO
     public function setVoidFlag(bool $void_flag): AuthorizePayment
     {
         $this->void_flag = $void_flag;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWalletToken(): ?string
+    {
+        return $this->wallet_token;
+    }
+
+    /**
+     * Set the digital wallet token for Apple Pay or Google Pay.
+     * When using Apple Pay, also set creditCardType to 'applepay'.
+     *
+     * @param string $wallet_token
+     * @return AuthorizePayment
+     */
+    public function setWalletToken(string $wallet_token): AuthorizePayment
+    {
+        $this->wallet_token = $wallet_token;
 
         return $this;
     }
